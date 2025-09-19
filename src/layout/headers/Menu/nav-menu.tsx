@@ -8,29 +8,8 @@ const NavMenu = () => {
     <>
       <ul>
         {menu_data.map((item, i) => (
-          <li key={i}  className={`${item.id === 1 ? "has-dropdown has-mega-menu" : ""} ${item.id === 3 ? "header-services has-dropdown has-mega-menu" : ""} ${item.id === 4 ? "has-dropdown has-megamenu" : ""} ${item.id === 5 ? "has-dropdown" : ""}`}>
+          <li key={i}  className={`${item.id === 3 ? "header-services has-dropdown has-mega-menu" : ""} ${item.id === 4 ? "has-dropdown has-megamenu" : ""}`}>
             <Link href={item.link}>{item.title}</Link>
-            {item.id === 1 &&
-              <div className="tp-submenu submenu has-homemenu tp-mega-menu">
-                <div className="row gx-6 row-cols-1 row-cols-md-2 row-cols-xl-5">
-                  {item.sub_menus?.map((home_item, h_index) =>
-                    <div key={h_index} className={`col homemenu ${h_index === 0 ? "active" : ""}`}>
-                      <div className="homemenu-thumb">
-                        <Link  href={home_item.link}>
-                          <Image src={home_item.demo_img} alt="theme-pure" />
-                        </Link>
-                      </div>
-                      <div className="homemenu-btn">
-                        <Link className="menu-btn" href={home_item.link}>View Demo</Link>
-                      </div>
-                      <div className="demo-name">
-                        <span>{home_item.title}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            }
             {item.id === 3 &&
                <div className="tp-mega-menu tp-submenu submenu">
                   <div className="row">
@@ -86,14 +65,6 @@ const NavMenu = () => {
                   
                   )} 
                 </ul>  
-            }
-            {item.id === 5 && 
-              <ul className="tp-submenu submenu">
-                {item.sub_menus?.map((drap_item, drap_index) => 
-                  <li key={drap_index}><Link href={drap_item.link}>{drap_item.title}</Link></li>
-                
-                )} 
-              </ul>            
             }
           </li>
         ))}
