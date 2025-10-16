@@ -55,7 +55,7 @@ const HeaderFour = () => {
 									</div>
 									<div className="col-xl-2 col-lg-6 col-sm-7 col-6">
 										<div className="header-btn header-btn-4 text-end">
-											<Link className="blue-btn d-none d-xl-block" href="/contact">Contact Us</Link>
+											<Link className="blue-btn d-none d-xl-block" target="_blank" href="https://app.trafficboxes.com/">Dashboard</Link>
 											<div className="offcanvas-btn d-xl-none ml-20">
 												<button className="offcanvas-open-btn" onClick={() => setOpenCanvas(true)}><i className="fa-solid fa-bars"></i></button>
 											</div>

@@ -7,7 +7,7 @@ import service_demo_3 from "@/assets/img/header-icon/building.png";
 import service_demo_4 from "@/assets/img/header-icon/media.png";
 import service_demo_5 from "@/assets/img/header-icon/analysis.png";
 
-import menu_banner from "@/assets/img/header-icon/header-banner/header-banner-1.png";
+// import menu_banner from "@/assets/img/header-icon/header-banner/header-banner-1.png";
  
 // type MenuData =  
 interface menu_data_type  {
@@ -66,7 +66,7 @@ const menu_data: menu_data_type[] = [
     banner_sub_title: "SEO Agency",
     banner_title: <>The #1 SEO <br/> agency for fast growing <br /> companies.</>,
     icon: <RightArrowMenu />,
-    m_banner: menu_banner,
+    // m_banner: menu_banner,
   },
   {
     id: 4,
