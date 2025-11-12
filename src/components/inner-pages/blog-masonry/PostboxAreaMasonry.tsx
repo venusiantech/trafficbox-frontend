@@ -1,90 +1,102 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import VideoPopup from "@/componentsmodals/video-popup";
 import UserIcon from "@/svg/inner-pages-icons/UserIcon";
 import ClockIcon from "@/svg/inner-pages-icons/ClockIcon";
-import blog_masonry_data from "@/data/blog-masonry-data";
 import PrevBlogIcon from "@/svg/inner-pages-icons/PrevBlogIcon";
 import NextBlogIcon from "@/svg/inner-pages-icons/NextBlogIcon";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { blogService, Blog } from "@/services/blogService";
 
 const PostboxAreaMasonry = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+        const data = await blogService.getPublicBlogs();
+        setBlogs(data.blogs);
+        setError(null);
+      } catch (err) {
+        setError('Failed to load blogs. Please try again later.');
+        console.error('Error fetching blogs:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  const getAuthorName = (blog: Blog) => {
+    if (blog.author) {
+      return `${blog.author.firstName} ${blog.author.lastName}`;
+    }
+    return 'Anonymous';
+  };
+
   return (
     <>
       <section className="postbox__area pt-120 pb-90">
         <div className="container container-lagre-box">
-          <ResponsiveMasonry
-            className="row blog-masonry-active"
-            columnsCountBreakPoints={{ 0: 1, 750: 3, 992: 4 }}
-          >
-            <Masonry gutter="20px">
-              {blog_masonry_data.map((item, i) => (
-                <div key={i} className="blog-masonry-item-active">
-                  {item.qute && (
-                    <div className="tpmasonry-item mb-30">
-                      <div className="tpmasonry-icon mb-40">
-                        <span>{item.icon && <item.icon />}</span>
-                      </div>
-                      <div className="tpmasonry-content-2">
-                        <span>{item.sub_title}</span>
-                        <h4 className="tpmasonry-title-white">
-                          <Link href="/blog-details">{item.sm_info}</Link>
-                        </h4>
-                        <p>{item.post_by}</p>
-                      </div>
-                    </div>
-                  )}
-                  {!item.qute && (
+          {/* Loading State */}
+          {loading && (
+            <div className="text-center py-5">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <p className="mt-3">Loading blogs...</p>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="alert alert-danger" role="alert">
+              {error}
+            </div>
+          )}
+
+          {/* Masonry Grid */}
+          {!loading && !error && blogs.length > 0 && (
+            <ResponsiveMasonry
+              className="row blog-masonry-active"
+              columnsCountBreakPoints={{ 0: 1, 750: 3, 992: 4 }}
+            >
+              <Masonry gutter="20px">
+                {blogs.map((blog, i) => (
+                  <div key={blog._id} className="blog-masonry-item-active">
                     <div className="tpblog-item-2 mb-30">
                       <div className="tpblog-thumb-2 masonry_video">
-                        <Link href="/blog-details">
-                          {item.img && (
-                            <Image src={item.img} alt="theme-pure" />
+                        <Link href={`/blog-details?slug=${blog.slug}`}>
+                          {blog.imageUrl && (
+                            <Image 
+                              src={blog.imageUrl} 
+                              alt={blog.title}
+                              width={400}
+                              height={300}
+                              style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                            />
                           )}
                         </Link>
-                        {item.video && (
-                          <div className="tpmasonry-video mb-30">
-                            <div className="masonry_video_inner">
-                              <a
-                                className="popup-video"
-                                onClick={() => setIsVideoOpen(true)}
-                                style={{ cursor: "pointer" }}
-                              >
-                                <span>
-                                  <svg
-                                    width="15"
-                                    height="18"
-                                    viewBox="0 0 15 18"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M15 9L0 17.6603L0 0.339746L15 9Z"
-                                      fill="currentColor"
-                                    ></path>
-                                  </svg>
-                                </span>
-                              </a>
-                            </div>
-                          </div>
-                        )}
                       </div>
 
                       <div className="tpblog-wrap">
                         <div className="tpblog-content-2">
                           <span>
-                            <Link href="/blog-details">{item.catagory}</Link>
+                            <Link href={`/blog-details?slug=${blog.slug}`}>
+                              {blog.summary ? blogService.getExcerpt(blog.summary, 20) : 'Blog'}
+                            </Link>
                           </span>
                           <h4 className="tpblog-title-2">
-                            {item.title && (
-                              <Link
-                                href="/blog-details"
-                                dangerouslySetInnerHTML={{ __html: item.title }}
-                              ></Link>
-                            )}
+                            <Link href={`/blog-details?slug=${blog.slug}`}>
+                              {blog.title}
+                            </Link>
                           </h4>
                         </div>
                         <div className="tpblog-meta-2">
@@ -92,24 +104,31 @@ const PostboxAreaMasonry = () => {
                             <i>
                               <ClockIcon />{" "}
                             </i>
-                            {item.time}
+                            {blogService.formatDate(blog.createdAt)}
                           </span>
                           <span>
                             <a href="#">
                               <i>
                                 <UserIcon />{" "}
                               </i>
-                              {item?.post_writer}
+                              {getAuthorName(blog)}
                             </a>
                           </span>
                         </div>
                       </div>
                     </div>
-                  )}
-                </div>
-              ))}
-            </Masonry>
-          </ResponsiveMasonry>
+                  </div>
+                ))}
+              </Masonry>
+            </ResponsiveMasonry>
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && blogs.length === 0 && (
+            <div className="text-center py-5">
+              <p>No blogs found.</p>
+            </div>
+          )}
           <div className="row">
             <div className="col-lg-12">
               <div className="basic-pagination text-center pt-30">

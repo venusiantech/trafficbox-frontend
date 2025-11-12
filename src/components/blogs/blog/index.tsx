@@ -1,7 +1,6 @@
-import BreadcrumbNine from "@/components/common/breadcrumb/breadcrumb-9";
 import FooterFour from "@/layout/footers/FooterFour";
 import HeaderFour from "@/layout/headers/HeaderFour";
-import BlogPostboxArea from "./BlogPostboxArea";
+import ModernBlogArea from "./ModernBlogArea";
 
 
 const Blog = () => {
@@ -9,8 +8,7 @@ const Blog = () => {
         <>
             <HeaderFour />
             <main>
-                <BreadcrumbNine top_title="Blog" title="Blog" />
-                <BlogPostboxArea />
+                <ModernBlogArea />
             </main>
             <FooterFour />
         </>
