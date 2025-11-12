@@ -1,4 +1,4 @@
-
+import { Suspense } from 'react';
 import BlogDetails from '@/components/blogs/blog-details';
 import ScrollToTop from '@/components/common/scroll-to-top';
 import Wrapper from '@/layout/Wrapper';
@@ -9,7 +9,23 @@ export const metadata = {
 const index = () => {
     return (
         <Wrapper>
-            <BlogDetails />
+            <Suspense fallback={
+                <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center', 
+                    minHeight: '60vh',
+                    flexDirection: 'column',
+                    gap: '20px'
+                }}>
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                    <p>Loading blog details...</p>
+                </div>
+            }>
+                <BlogDetails />
+            </Suspense>
             <ScrollToTop />
         </Wrapper>
     );

@@ -93,7 +93,7 @@ const BrandAreaHomeFour = () => {
 						className="wave wave-1"
 						options={{
 							height: 150,
-							bones: 7,
+							points: 7,
 							amplitude: 70,
 							speed: 0.21
 						}}
@@ -103,7 +103,7 @@ const BrandAreaHomeFour = () => {
 						className="wave"
 						options={{
 							height: 150,
-							bones: 8,
+							points: 8,
 							amplitude: 45,
 							speed: 0.24
 						}}
