@@ -11,15 +11,16 @@ import about_brand_img_6 from "@/assets/img/brand/inner-brand-6.png";
 import ScrollDownBtn from '@/svg/about_btn/ScrollDownBtn'; 
 
 // about brand data type
-type about_brand_content_type = {
+type AboutBrandContentType = {
     scroll_btn: JSX.Element;
     about_brand: {
         id: number;
         img: StaticImageData;
     }[];
 }
+
 // about brand data
-const about_brand_content: about_brand_content_type = {
+const about_brand_content: AboutBrandContentType = {
     scroll_btn: <>Scroll down <br /> to explore more</>,
     about_brand: [
         {id: 1, img: about_brand_img_1},
@@ -33,13 +34,15 @@ const about_brand_content: about_brand_content_type = {
         {id: 9, img: about_brand_img_3},
     ]
 }
-const {scroll_btn, about_brand} = about_brand_content
 
-const setting = {
+const {scroll_btn, about_brand} = about_brand_content;
+
+const sliderSettings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 1000,
     autoplay: true,
+    autoplaySpeed: 3000,
     arrows: false,
     slidesToShow: 5,
     slidesToScroll: 1,
@@ -48,12 +51,6 @@ const setting = {
             breakpoint: 1800,
             settings: {
                 slidesToShow: 5,
-            }
-        },
-        {
-            breakpoint: 1700,
-            settings: {
-                slidesToShow: 4,
             }
         },
         {
@@ -71,7 +68,7 @@ const setting = {
         {
             breakpoint: 1200,
             settings: {
-                slidesToShow: 2,
+                slidesToShow: 3,
             }
         },
         {
@@ -83,42 +80,59 @@ const setting = {
         {
             breakpoint: 768,
             settings: {
-                slidesToShow: 1,
+                slidesToShow: 2,
+                autoplay: true,
             }
         },
         {
-            breakpoint: 480,
+            breakpoint: 576,
             settings: {
                 slidesToShow: 1,
+                autoplay: true,
             }
         }
     ],
-}
+};
+
 const AboutBrandArea = () => {
-    const sliderRef = useRef(null)
+    const sliderRef = useRef(null);
+    
     return (
         <>
-            <section className="brand-area pb-120">
-                <div className="container-fluid">
-                    <div className="row align-items-center">
-                        <div className="col-lg-2 offset-lg-5 col-md-4">
-                            <div className="brand-wrapper ">
+            <section className="brand-area py-4 mt-80 mb-80" style={{backgroundColor: '#f2f2f2'}}>
+                <div className="container">
+                    <div className="row justify-content-between align-items-center">
+                        <div className="col-xl-3 col-lg-4 col-md-5 mb-4 mb-md-0">
+                            <div className="brand-wrapper text-center text-md-start">
                                 <div className="brand-inner-content">
-                                    <h4 className="brand-inner-title">{scroll_btn}</h4>
-                                    <a href="#our-misson">
-                                        <i><ScrollDownBtn /></i>
+                                    <h4 className="brand-inner-title mb-3">{scroll_btn}</h4>
+                                    <a href="#our-misson" className="d-inline-block">
+                                        <i className="scroll-btn-icon"><ScrollDownBtn /></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-5 col-md-8">
-                            <Slider {...setting} ref={sliderRef} className="brand-inner-wrapper tpbrand-inner-active">
-                                {about_brand.map((item, i)  => 
-                                    <div key={i} className="tpbrand-inner-item">
-                                        <Image src={item.img} alt="theme-pure" />
-                                    </div>                                
-                                )}                                
-                            </Slider>
+                        <div className="col-xl-8 col-lg-8 col-md-7">
+                            <div className="brand-slider-container">
+                                <Slider 
+                                    {...sliderSettings} 
+                                    ref={sliderRef} 
+                                    className="brand-inner-wrapper"
+                                >
+                                    {about_brand.map((item, i) => (
+                                        <div key={i} className="brand-item px-2">
+                                            <div className="brand-img-wrapper d-flex align-items-center justify-content-center">
+                                                <Image 
+                                                    src={item.img} 
+                                                    alt="TrafficBox Partner" 
+                                                    className="img-fluid"
+                                                    style={{ maxHeight: '80px', width: 'auto' }}
+                                                />
+                                            </div>
+                                        </div>                                
+                                    ))}                                
+                                </Slider>
+                            </div>
                         </div>
                     </div>
                 </div>

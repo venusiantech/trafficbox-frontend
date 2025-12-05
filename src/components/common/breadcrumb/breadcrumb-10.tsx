@@ -29,7 +29,7 @@ const { bg_img, top_title, title, post_writer, time, comments } = breadcrumb_con
 const BreadcrumbTen = () => {
     return (
         <>
-            <section className="blog-details-area blog-details-bg pb-120 pt-200"
+            <section className="blog-details-area blog-details-bg pb-120 pt-200 mt-5"
                 style={{ backgroundImage: `url(${bg_img})` }}>
                 <div className="container">
                     <div className="row">

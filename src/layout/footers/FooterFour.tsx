@@ -24,7 +24,7 @@ const FooterFour = () => {
                                 <div className="footer-widget footer-4-col-1 mb-30">
                                 <div className="footer-widget-logo mb-20">
                                     <Link href="/">
-                                        <span> <Image src="/logo/Traffic-boxes-grey.png" alt="Trafficboxs.com" width={180} height={45} /> </span>
+                                        <span> <Image src="/logo/TrafficBoxes_Logo.png" alt="Trafficboxs.com" width={180} height={45} /> </span>
                                     </Link>
                                 </div>
                                 <div className="footer-widget-content">

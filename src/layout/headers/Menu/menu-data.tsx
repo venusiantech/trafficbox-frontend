@@ -68,44 +68,44 @@ const menu_data: menu_data_type[] = [
     icon: <RightArrowMenu />,
     // m_banner: menu_banner,
   },
-  {
-    id: 4,
-    title: "Pages",
-    link: "#",
-    has_dropdown: true,
-    has_megamenu: true,
-    sub_menus: [
-      {  
-      layout: [
-          { link: "/about",                 title: "About Us" }, 
-          { link: "/service",               title: "Services" }, 
-          { link: "/team",                  title: "Team Member" }, 
-          { link: "/team-details",          title: "Team Details" }, 
-          { link: "/sign-in",               title: "Sign In" }, 
-          { link: "/sign-out",              title: "Sign Up" }, 
-        ],
-      },
-      {  
-        layout: [
-            { link: "/pricing",            title: "Pricing" },  
-            { link: "/portfolio",          title: "Case Studies 2 Columns" },  
-            { link: "/portfolio-2",        title: "Case Studies 3 Columns" },  
-            { link: "/portfolio-details",  title: "Case Studies Details" },  
-            { link: "/blog-grid",          title: "Blog Grid" },  
-            { link: "/blog-masonry",       title: "Blog Masonry" },  
-          ],
-      },
-      {  
-        layout: [
-            { link: "/blog-list",          title: "Blog List" },  
-            { link: "/blog-details",       title: "Blog Details" },  
-            { link: "/blog-details-2",     title: "Blog Details Full Width" },  
-            { link: "/faq",                title: "FAQ" },  
-            { link: "/contact",            title: "Contact" },  
-          ],
-      }, 
-    ],
-  },
+  // {
+  //   id: 4,
+  //   title: "Pages",
+  //   link: "#",
+  //   has_dropdown: true,
+  //   has_megamenu: true,
+  //   sub_menus: [
+  //     {  
+  //     layout: [
+  //         { link: "/about",                 title: "About Us" }, 
+  //         { link: "/service",               title: "Services" }, 
+  //         { link: "/team",                  title: "Team Member" }, 
+  //         { link: "/team-details",          title: "Team Details" }, 
+  //         { link: "/sign-in",               title: "Sign In" }, 
+  //         { link: "/sign-out",              title: "Sign Up" }, 
+  //       ],
+  //     },
+  //     {  
+  //       layout: [
+  //           { link: "/pricing",            title: "Pricing" },  
+  //           { link: "/portfolio",          title: "Case Studies 2 Columns" },  
+  //           { link: "/portfolio-2",        title: "Case Studies 3 Columns" },  
+  //           { link: "/portfolio-details",  title: "Case Studies Details" },  
+  //           { link: "/blog-grid",          title: "Blog Grid" },  
+  //           { link: "/blog-masonry",       title: "Blog Masonry" },  
+  //         ],
+  //     },
+  //     {  
+  //       layout: [
+  //           { link: "/blog-list",          title: "Blog List" },  
+  //           { link: "/blog-details",       title: "Blog Details" },  
+  //           { link: "/blog-details-2",     title: "Blog Details Full Width" },  
+  //           { link: "/faq",                title: "FAQ" },  
+  //           { link: "/contact",            title: "Contact" },  
+  //         ],
+  //     }, 
+  //   ],
+  // },
   {
     id: 5,
     title: "Blog",

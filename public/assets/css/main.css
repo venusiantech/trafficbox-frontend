@@ -14106,7 +14106,6 @@ div.price-open {
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 50px 50px 65px 50px;
-  z-index: 2;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px) {
   .tpcontact-form {

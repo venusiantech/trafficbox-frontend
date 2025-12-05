@@ -12,7 +12,7 @@ type breadcrumb_9_content_type = {
 const BreadcrumbNine = ({title, top_title}: breadcrumb_9_content_type) => {
     return (
         <>
-            <section className="breadcrumb-area breadcrumb-overlay p-relative pb-115 pt-195 jarallax"
+            <section className="breadcrumb-area pb-115 pt-195 mt-5 jarallax"
                 style={{ backgroundImage: `url(/assets/img/breadcrumb/breadcrumb-bg-1.jpg)` }}>
                 <div className="container">
                     <div className="row">

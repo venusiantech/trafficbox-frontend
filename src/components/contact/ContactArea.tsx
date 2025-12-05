@@ -5,8 +5,7 @@ import RightArrowIconContact from "@/svg/contact_icon/RightArrowIconContact";
 import { SocialLinksTwo } from "../common/social-links";
 import ContactUs from "../forms/ContactUs";
 
-
-type contact_conent_type = {
+type ContactContentType = {
     title: string;
     sm_info: JSX.Element;
     email: string;
@@ -14,52 +13,54 @@ type contact_conent_type = {
     btn_text: string;
 }
 
-const contact_conent: contact_conent_type = {
+const contactContent: ContactContentType = {
     title: "Get in Touch",
-    sm_info: <>If you need help with your account or have questions about <br /> credit sesame, please visit our Help center.!</>,
+    sm_info: <>If you need help with your account or have questions about credit sesame, please visit our Help center.</>,
     email: "Info@contact.com",
     phone: "+1 415 704 6387",
     btn_text: "Contact Us",
 }
-const { title, sm_info, email, phone, btn_text } = contact_conent
+
+const { title, sm_info, email, phone, btn_text } = contactContent;
 
 const ContactArea = () => {
     return (
-        <>
-            <section className="contact-area contact-bg pt-200">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xl-5 col-lg-6">
-                            <div className="contact-content mb-30">
-                                <h4 className="contact-title">{title}</h4>
-                                <p>{sm_info}</p>
-                                <div className="contact-info">
-                                    <a href={`mailto:${email}`} className="contact-mail mb-15">
-                                        <span><EmailIconContact /></span>
-                                        {email}
-                                        <i> <RightArrowIconContact /> </i>
-                                    </a>
-                                    <a href={`tel:${phone}`} className="contact-mail mb-20">
-                                        <span><PhoneIconContact /></span>
-                                        {phone}
-                                        <i> <RightArrowIconContact /> </i>
-                                    </a>
-                                </div>
-                                <div className="contact-social">
-                                    <SocialLinksTwo />
-                                </div>
+        <section className="contact-area pb-200 pt-150">
+            <div className="container">
+                <div className="row g-4 justify-content-between">
+                    <div className="col-lg-5">
+                        <div className="contact-content">
+                            <h4 className="contact-title mb-4">{title}</h4>
+                            <p className="mb-4">{sm_info}</p>
+                            
+                            <div className="contact-info mb-4">
+                                <a href={`mailto:${email}`} className="contact-mail d-flex align-items-center mb-3">
+                                    <span className="contact-icon me-3"><EmailIconContact /></span>
+                                    <span className="flex-grow-1">{email}</span>
+                                    <i className="arrow-icon"><RightArrowIconContact /></i>
+                                </a>
+                                <a href={`tel:${phone}`} className="contact-mail d-flex align-items-center">
+                                    <span className="contact-icon me-3"><PhoneIconContact /></span>
+                                    <span className="flex-grow-1">{phone}</span>
+                                    <i className="arrow-icon"><RightArrowIconContact /></i>
+                                </a>
                             </div>
-                        </div>
-                        <div className="offset-xl-1 col-xl-6 col-lg-6">
-                            <div className="contact-form">
-                                <h4 className="contact-form-title">{btn_text}</h4>
-                                <ContactUs />
+                            
+                            <div className="contact-social mt-4">
+                                <SocialLinksTwo />
                             </div>
                         </div>
                     </div>
+                    
+                    <div className="col-lg-6">
+                        <div className="contact-form p-4 rounded">
+                            <h4 className="contact-form-title mb-4">{btn_text}</h4>
+                            <ContactUs />
+                        </div>
+                    </div>
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     );
 };
 
