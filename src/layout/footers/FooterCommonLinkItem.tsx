@@ -17,10 +17,11 @@ const footer_links: footer_links_type[] = [
       links: [
         { title: "Home", link: "/" },
         { title: "About Us", link: "/about" },
-        { title: "Project", link: "/portfolio" },
+        // { title: "Project", link: "/portfolio" },
         { title: "Plan & Pricing", link: "/pricing" },
         { title: "Blog", link: "/blog" },
         { title: "Contact Us", link: "/contact" },
+        { title: "Sign Up", link: "https://app.trafficboxes.com/" },
       ],
     },
     {

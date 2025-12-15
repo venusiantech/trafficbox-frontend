@@ -20867,9 +20867,9 @@ div.price-open {
 .markiting-wrap {
   padding-top: 180px;
   padding-bottom: 325px;
-  position: relative;
-  background: linear-gradient(180deg, #4260FF 0%, #2346FF 100%);
-  z-index: 1;
+  /* position: relative; */
+  /* background: linear-gradient(180deg, #4260FF 0%, #2346FF 100%); */
+  /* z-index: 1; */
 }
 .markiting-shape {
   position: absolute;
@@ -20891,7 +20891,7 @@ div.price-open {
   font-weight: 500;
   font-size: 16px;
   line-height: 14px;
-  color: #DDE2FF;
+  color: #000000;
   display: inline-block;
   margin-bottom: 14px;
 }
@@ -20900,7 +20900,7 @@ div.price-open {
   font-weight: 700;
   font-size: 70px;
   letter-spacing: -0.03em;
-  color: #FFFFFF;
+  color: #000000;
   margin-bottom: 0;
   line-height: 1.12;
 }

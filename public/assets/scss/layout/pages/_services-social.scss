@@ -5,11 +5,8 @@
 /*----------------------------------------*/
 .markiting {
     &-wrap {
-        padding-top: 180px;
+        padding-top: 120px;
         padding-bottom: 325px;
-        position: relative;
-        background: linear-gradient(180deg, #4260FF 0%, #2346FF 100%);
-        z-index: 1;
     }
     &-shape {
         position: absolute;
@@ -32,7 +29,7 @@
             font-weight: 500;
             font-size: 16px;
             line-height: 14px;
-            color: #DDE2FF;
+            color: #4260ff;
             display: inline-block;
             margin-bottom: 14px;
         }
@@ -42,7 +39,7 @@
         font-weight: 700;
         font-size: 70px;
         letter-spacing: -0.03em;
-        color: #FFFFFF;
+        color: #000000;
         margin-bottom: 0;
         line-height: 1.12;
         @media #{$md} {
