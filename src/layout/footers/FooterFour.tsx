@@ -16,32 +16,37 @@ const FooterFour = () => {
     return (
         <>
             <footer>
-                <div className="footer-area footer-bg-4 pt-100">
+                <div className="footer-area footer-bg-4 pt-60 pb-20">
                     <div className="container">
                     <div className="footer-top">
                         <div className="row">
-                            <div className="col-lg-3 col-md-6 col-sm-12">
+                            <div className="col-lg-4 col-md-6 col-sm-12">
                                 <div className="footer-widget footer-4-col-1 mb-30">
-                                <div className="footer-widget-logo mb-20">
+                                <div className="footer-widget-logo mb-15">
                                     <Link href="/">
                                         <span> <Image src="/logo/TrafficBoxes_Logo.png" alt="Trafficboxs.com" width={180} height={45} /> </span>
                                     </Link>
                                 </div>
                                 <div className="footer-widget-content">
-                                    <p className="footer-widget-text mb-20">{footer_info} </p>
+                                    <p className="footer-widget-text mb-15">{footer_info} </p>
                                     <div className="fooer-btn-4">
                                         <Link className="blue-btn" href="/keyword-search">Grow Traffic</Link>
                                     </div>
                                 </div>
                                 </div>
                             </div>
-                            <FooterCommonLinkItem /> 
+                            
+                            <div className="col-lg-5 col-md-12">
+                                <div className="row">
+                                    <FooterCommonLinkItem /> 
+                                </div>
+                            </div>
 
                             <div className="col-lg-3 col-md-6 col-sm-8">
-                                <div className="footer-widget  footer-4-col-4 mb-40">
-                                    <h4 className="footer-widget-title mb-20">{subcribe}</h4>
-                                    <div className="footer-widget-content mb-40">
-                                        <p className="footer-widget-text mb-20">{title}</p>
+                                <div className="footer-widget footer-4-col-4 mb-30">
+                                    <h4 className="footer-widget-title mb-15">{subcribe}</h4>
+                                    <div className="footer-widget-content mb-20">
+                                        <p className="footer-widget-text mb-15">{title}</p>
                                             <SubcribeHomeFour />
                                     </div>
                                     <div className="footer-widget-social">

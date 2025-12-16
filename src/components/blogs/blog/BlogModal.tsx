@@ -90,25 +90,25 @@ const BlogModal = ({ blog, isOpen, onClose }: BlogModalProps) => {
             maxWidth: "900px",
             width: "100%",
             maxHeight: "90vh",
-            overflowY: "auto",
             position: "relative",
             boxShadow: "0 20px 60px rgba(0, 0, 0, 0.3)",
             animation: "slideUp 0.4s ease-out",
+            overflow: "hidden", // Hide overflow to contain scrollbar
           }}
         >
           {/* Close Button */}
           <button
             onClick={onClose}
             style={{
-              position: "sticky",
+              position: "absolute",
               top: "20px",
               right: "20px",
-              float: "right",
               width: "40px",
               height: "40px",
               borderRadius: "50%",
               border: "none",
-              background: "#fff",
+              background: "rgba(255, 255, 255, 0.95)",
+              backdropFilter: "blur(10px)",
               boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
               cursor: "pointer",
               display: "flex",
@@ -120,16 +120,26 @@ const BlogModal = ({ blog, isOpen, onClose }: BlogModalProps) => {
               zIndex: 10,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#f5f5f5";
+              e.currentTarget.style.background = "rgba(245, 245, 245, 0.95)";
               e.currentTarget.style.transform = "rotate(90deg)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#fff";
+              e.currentTarget.style.background = "rgba(255, 255, 255, 0.95)";
               e.currentTarget.style.transform = "rotate(0deg)";
             }}
           >
             ✕
           </button>
+
+          {/* Scrollable Content Container */}
+          <div
+            style={{
+              maxHeight: "90vh",
+              overflowY: "auto",
+              overflowX: "hidden",
+              scrollbarGutter: "stable",
+            }}
+          >
 
           {/* Blog Header Image */}
           {blog.imageUrl && (
@@ -138,7 +148,7 @@ const BlogModal = ({ blog, isOpen, onClose }: BlogModalProps) => {
                 position: "relative",
                 width: "100%",
                 height: "400px",
-                borderRadius: "24px 24px 0 0",
+                borderRadius: "16px 24px 0 0",
                 overflow: "hidden",
               }}
             >
@@ -443,6 +453,7 @@ const BlogModal = ({ blog, isOpen, onClose }: BlogModalProps) => {
               </div>
             </div>
           </div>
+          </div> {/* Close scrollable content container */}
         </div>
       </div>
 
@@ -551,23 +562,36 @@ const BlogModal = ({ blog, isOpen, onClose }: BlogModalProps) => {
           margin: 24px 0;
         }
 
-        /* Scrollbar Styling */
-        .blog-modal-content::-webkit-scrollbar {
+        /* Scrollbar Styling - Overlay Style */
+        .blog-modal-content > div {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+        }
+
+        .blog-modal-content > div::-webkit-scrollbar {
           width: 8px;
+          background: transparent;
         }
 
-        .blog-modal-content::-webkit-scrollbar-track {
-          background: #f1f1f1;
+        .blog-modal-content > div::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .blog-modal-content > div::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.2);
           border-radius: 10px;
+          border: 2px solid transparent;
+          background-clip: content-box;
         }
 
-        .blog-modal-content::-webkit-scrollbar-thumb {
-          background: #888;
-          border-radius: 10px;
+        .blog-modal-content > div::-webkit-scrollbar-thumb:hover {
+          background: rgba(0, 0, 0, 0.4);
+          background-clip: content-box;
         }
 
-        .blog-modal-content::-webkit-scrollbar-thumb:hover {
-          background: #555;
+        /* Hide scrollbar track completely */
+        .blog-modal-content > div::-webkit-scrollbar-corner {
+          background: transparent;
         }
 
         /* Responsive */

@@ -124,9 +124,48 @@ const ModernBlogArea = () => {
                       e.currentTarget.style.transform = "scale(1)";
                     }}
                   >
+                    {/* Blog Hero Image */}
+                    <div
+                      className="blog-hero-image"
+                      style={{
+                        position: "absolute",
+                        right: "0px",
+                        width: "40%",
+                        height: "100%",
+                        borderRadius: "16px",
+                        overflow: "hidden",
+                        zIndex: 1,
+                      }}
+                    >
+                      <Image
+                        src={featuredBlog.imageUrl || blog_thumb_fallback}
+                        alt={featuredBlog.title}
+                        fill
+                        style={{ 
+                          objectFit: "cover",
+                          transition: "transform 0.3s ease"
+                        }}
+                        onError={(e) => {
+                          e.currentTarget.src = blog_thumb_fallback.src;
+                        }}
+                      />
+                      {/* Subtle overlay for better integration */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          background: "rgba(102, 126, 234, 0.1)",
+                          mixBlendMode: "multiply"
+                        }}
+                      />
+                    </div>
+
                     <div
                       className="blog-hero-content"
-                      style={{ maxWidth: "600px", zIndex: 2 }}
+                      style={{ maxWidth: "500px", zIndex: 2 }}
                     >
                       <span
                         className="blog-hero-badge"
@@ -467,7 +506,7 @@ const ModernBlogArea = () => {
                       </p>
 
                       {/* Author */}
-                      <div
+                      {/* <div
                         className="blog-card-author"
                         style={{
                           display: "flex",
@@ -504,7 +543,7 @@ const ModernBlogArea = () => {
                         >
                           {getAuthorName(post)}
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                   </article>
                 </div>
@@ -547,89 +586,150 @@ const ModernBlogArea = () => {
             </div>
 
             {/* CTA Sections */}
-            <div className="row g-4 mt-80">
+            <div className="row g-4" style={{ marginTop: "60px" }}>
               <div className="col-lg-6">
                 <div
-                  className="blog-cta-card"
+                  className="blog-cta-card h-100"
                   style={{
                     background:
-                      "linear-gradient(135deg, #2d3436 0%, #000000 100%)",
+                      "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                     borderRadius: "20px",
-                    padding: "60px 40px",
+                    padding: "50px 40px",
                     color: "#fff",
-                    minHeight: "300px",
+                    minHeight: "320px",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
                   }}
                 >
+                  <div className="mb-3">
+                    <span
+                      style={{
+                        fontSize: "48px",
+                        fontWeight: "700",
+                        color: "#fff",
+                      }}
+                    >
+                      📊
+                    </span>
+                  </div>
                   <h3
                     style={{
-                      fontSize: "32px",
+                      fontSize: "28px",
                       fontWeight: "700",
                       marginBottom: "20px",
+                      color: "#fff",
                     }}
                   >
-                    Explore more to get your comfort zone
+                    Get Detailed SEO Reports & Analytics
                   </h3>
                   <p
                     style={{
                       fontSize: "16px",
+                      color: "#fff",
                       opacity: "0.9",
                       marginBottom: "30px",
+                      lineHeight: "1.6",
                     }}
                   >
-                    Book your perfect stay with us.
+                    Track your website's performance with comprehensive SEO reports, keyword rankings, and traffic analytics.
                   </p>
                   <Link
-                    href="/contact"
+                    href="https://app.trafficboxes.com/en/auth/register"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="tp-btn"
                     style={{
                       display: "inline-block",
                       background: "#fff",
-                      color: "#000",
-                      padding: "12px 30px",
-                      borderRadius: "8px",
+                      color: "#667eea",
+                      padding: "14px 32px",
+                      borderRadius: "10px",
                       fontWeight: "600",
                       textDecoration: "none",
                       width: "fit-content",
+                      transition: "all 0.3s ease",
                     }}
                   >
-                    Book Big Now →
+                    Start Free Trial →
                   </Link>
                 </div>
               </div>
               <div className="col-lg-6">
                 <div
-                  className="blog-cta-card"
+                  className="blog-cta-card h-100"
                   style={{
                     background:
-                      "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      "linear-gradient(135deg, #2d3436 0%, #000000 100%)",
                     borderRadius: "20px",
-                    padding: "60px 40px",
+                    padding: "50px 40px",
                     color: "#fff",
-                    minHeight: "300px",
+                    minHeight: "320px",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
-                    textAlign: "center",
                   }}
                 >
+                  <div className="mb-3">
+                    <span
+                      style={{
+                        fontSize: "48px",
+                        fontWeight: "700",
+                        color: "#fff",
+                      }}
+                    >
+                      🚀
+                    </span>
+                  </div>
                   <h3
                     style={{
-                      fontSize: "32px",
+                      fontSize: "28px",
                       fontWeight: "700",
                       marginBottom: "20px",
+                      color: "#fff",
                     }}
                   >
-                    Beyond accommodation, creating memories of a lifetime
+                    Boost Your Website Traffic Today
                   </h3>
-                  <div className="mt-4">
-                    <div style={{ fontSize: "48px", fontWeight: "700" }}>
-                      {blogs.length}
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      color: "#fff",
+                      opacity: "0.9",
+                      marginBottom: "30px",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    Discover powerful SEO strategies and marketing tools to increase your organic traffic and improve search rankings.
+                  </p>
+                  <div className="d-flex align-items-center gap-3">
+                    <div>
+                      <div style={{ fontSize: "32px", fontWeight: "700", color: "#fff" }}>
+                        {blogs.length}+
+                      </div>
+                      <div style={{ fontSize: "14px", color: "#fff", opacity: "0.8" }}>
+                        SEO Guides Available
+                      </div>
                     </div>
-                    <div style={{ fontSize: "16px", opacity: "0.9" }}>
-                      Article{blogs.length !== 1 ? "s" : ""} Available
+                    <div className="ms-auto">
+                      <Link
+                        href="https://app.trafficboxes.com/en/auth/register"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="tp-btn"
+                        style={{
+                          display: "inline-block",
+                          background: "#fff",
+                          color: "#000",
+                          padding: "14px 32px",
+                          borderRadius: "10px",
+                          fontWeight: "600",
+                          textDecoration: "none",
+                          transition: "all 0.3s ease",
+                        }}
+                      >
+                        Get Started →
+                      </Link>
                     </div>
                   </div>
                 </div>

@@ -28,12 +28,12 @@ const footer_links: footer_links_type[] = [
       id: 2,
       title: "Services",
       links: [
-        { title: "SEO Audit", link: "#" },
-        { title: "SEO Services", link: "#" },
-        { title: "SEO Marketing", link: "#" },
+        // { title: "SEO Audit", link: "#" },
+        // { title: "SEO Services", link: "#" },
+        // { title: "SEO Marketing", link: "#" },
         { title: "SEO Analysis", link: "#" },
-        { title: "SEO Optimization", link: "#" },
-        { title: "Social Media", link: "#" },
+        // { title: "SEO Optimization", link: "#" },
+        // { title: "Social Media", link: "#" },
       ],
     },
   ]
@@ -42,8 +42,8 @@ const FooterCommonLinkItem = () => {
     return (
         <>
             {footer_links.map((item, i) => (
-                  <div key={i} className="col-lg-3 col-md-6">
-                    <div className="footer-widget footer-col-2 mb-40">
+                  <div key={i} className="col-lg-6 col-md-6">
+                    <div className="footer-widget footer-col-2 mb-30">
                       <h4 className="footer-widget-title mb-15">
                         {item.title}
                       </h4>

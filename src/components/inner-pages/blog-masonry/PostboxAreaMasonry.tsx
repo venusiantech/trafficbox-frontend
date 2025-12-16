@@ -7,7 +7,6 @@ import UserIcon from "@/svg/inner-pages-icons/UserIcon";
 import ClockIcon from "@/svg/inner-pages-icons/ClockIcon";
 import PrevBlogIcon from "@/svg/inner-pages-icons/PrevBlogIcon";
 import NextBlogIcon from "@/svg/inner-pages-icons/NextBlogIcon";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { blogService, Blog } from "@/services/blogService";
 
 const PostboxAreaMasonry = () => {
@@ -62,65 +61,71 @@ const PostboxAreaMasonry = () => {
             </div>
           )}
 
-          {/* Masonry Grid */}
+          {/* Blog Grid - 3 Cards per Row */}
           {!loading && !error && blogs.length > 0 && (
-            <ResponsiveMasonry
-              className="row blog-masonry-active"
-              columnsCountBreakPoints={{ 0: 1, 750: 3, 992: 4 }}
-            >
-              <Masonry gutter="20px">
-                {blogs.map((blog, i) => (
-                  <div key={blog._id} className="blog-masonry-item-active">
-                    <div className="tpblog-item-2 mb-30">
-                      <div className="tpblog-thumb-2 masonry_video">
-                        <Link href={`/blog-details?slug=${blog.slug}`}>
-                          {blog.imageUrl && (
-                            <Image 
-                              src={blog.imageUrl} 
-                              alt={blog.title}
-                              width={400}
-                              height={300}
-                              style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
-                            />
-                          )}
-                        </Link>
-                      </div>
+            <div className="row">
+              {blogs.map((blog, i) => (
+                <div key={blog._id} className="col-lg-4 col-md-6 col-sm-12 mb-4">
+                  <div className="tpblog-item-2 h-100 d-flex flex-column">
+                    <div className="tpblog-thumb-2 flex-shrink-0">
+                      <Link href={`/blog-details?slug=${blog.slug}`}>
+                        {blog.imageUrl && (
+                          <Image 
+                            src={blog.imageUrl} 
+                            alt={blog.title}
+                            width={400}
+                            height={250}
+                            style={{ 
+                              width: '100%', 
+                              height: '250px', 
+                              objectFit: 'cover',
+                              borderRadius: '8px'
+                            }}
+                          />
+                        )}
+                      </Link>
+                    </div>
 
-                      <div className="tpblog-wrap">
-                        <div className="tpblog-content-2">
-                          <span>
-                            <Link href={`/blog-details?slug=${blog.slug}`}>
-                              {blog.summary ? blogService.getExcerpt(blog.summary, 20) : 'Blog'}
-                            </Link>
-                          </span>
-                          <h4 className="tpblog-title-2">
-                            <Link href={`/blog-details?slug=${blog.slug}`}>
-                              {blog.title}
-                            </Link>
-                          </h4>
-                        </div>
-                        <div className="tpblog-meta-2">
-                          <span>
+                    <div className="tpblog-wrap flex-grow-1 d-flex flex-column">
+                      <div className="tpblog-content-2 flex-grow-1">
+                        <span className="blog-category mb-2 d-inline-block">
+                          <Link href={`/blog-details?slug=${blog.slug}`}>
+                            {blog.summary ? blogService.getExcerpt(blog.summary, 20) : 'Blog'}
+                          </Link>
+                        </span>
+                        <h4 className="tpblog-title-2 mb-3" style={{ 
+                          minHeight: '60px',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden'
+                        }}>
+                          <Link href={`/blog-details?slug=${blog.slug}`}>
+                            {blog.title}
+                          </Link>
+                        </h4>
+                      </div>
+                      <div className="tpblog-meta-2 mt-auto">
+                        <span className="me-3">
+                          <i>
+                            <ClockIcon />{" "}
+                          </i>
+                          {blogService.formatDate(blog.createdAt)}
+                        </span>
+                        <span>
+                          <a href="#" className="text-decoration-none">
                             <i>
-                              <ClockIcon />{" "}
+                              <UserIcon />{" "}
                             </i>
-                            {blogService.formatDate(blog.createdAt)}
-                          </span>
-                          <span>
-                            <a href="#">
-                              <i>
-                                <UserIcon />{" "}
-                              </i>
-                              {getAuthorName(blog)}
-                            </a>
-                          </span>
-                        </div>
+                            {getAuthorName(blog)}
+                          </a>
+                        </span>
                       </div>
                     </div>
                   </div>
-                ))}
-              </Masonry>
-            </ResponsiveMasonry>
+                </div>
+              ))}
+            </div>
           )}
 
           {/* Empty State */}

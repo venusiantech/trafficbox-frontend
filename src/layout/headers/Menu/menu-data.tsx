@@ -45,8 +45,8 @@ const menu_data: menu_data_type[] = [
   },
   {
     id: 2,
-    title: "About",    
-    link: "/about",
+    title: "Plans",    
+    link: "/pricing",
     has_dropdown: false, 
   },
   {
@@ -115,7 +115,7 @@ const menu_data: menu_data_type[] = [
   {
     id: 5,
     title: "Blog",
-    link: "/blog-masonry",
+    link: "/blog",
     has_dropdown: false,
   },
   {
