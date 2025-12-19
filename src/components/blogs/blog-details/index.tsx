@@ -1,4 +1,3 @@
-import BreadcrumbTen from "@/components/common/breadcrumb/breadcrumb-10";
 import FooterFour from "@/layout/footers/FooterFour";
 import HeaderFour from "@/layout/headers/HeaderFour";
 import BlogDetailsArticleArea from "./BlogDetailsArticleArea";
@@ -10,9 +9,8 @@ const BlogDetails = () => {
         <>
             <HeaderFour />
             <main> 
-                <BreadcrumbTen />
                 <BlogDetailsPostboxArea />
-                <BlogDetailsArticleArea />
+                {/* <BlogDetailsArticleArea /> */}
             </main>
             <FooterFour />
         </>

@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { blogService, Blog } from "@/services/blogService";
-import BlogModal from "./BlogModal";
 
 // Fallback images
 import blog_thumb_fallback from "@/assets/img/blog/blog-1-bg-1.jpg";
@@ -18,13 +18,12 @@ const categories = [
 ];
 
 const ModernBlogArea = () => {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("All");
   const [sortBy, setSortBy] = useState("Newest");
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch blogs from API
   useEffect(() => {
@@ -45,47 +44,195 @@ const ModernBlogArea = () => {
     fetchBlogs();
   }, []);
 
-  // Get featured blog (first blog)
-  const featuredBlog = blogs.length > 0 ? blogs[0] : null;
 
   // Filter blogs (skip featured blog in the grid)
   const gridBlogs = blogs.slice(1);
 
   const filteredPosts = gridBlogs;
-
-  // Helper function to get author full name
-  const getAuthorName = (blog: Blog) => {
-    return `${blog.author.firstName} ${blog.author.lastName}`;
-  };
-
-  // Helper function to get author initials
-  const getAuthorInitials = (blog: Blog) => {
-    return `${blog.author.firstName.charAt(0)}${blog.author.lastName.charAt(0)}`;
-  };
-
-  // Handle blog click
+  // Handle blog click - navigate to blog details page
   const handleBlogClick = (blog: Blog) => {
-    setSelectedBlog(blog);
-    setIsModalOpen(true);
-  };
-
-  // Handle modal close
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedBlog(null), 300); // Clear after animation
+    router.push(`/blog-details?slug=${blog.slug}`);
   };
 
   return (
     <section className="modern-blog-area pt-60 pb-120">
       <div className="container">
-        {/* Loading State */}
+        {/* Loading State - Skeleton */}
         {loading && (
-          <div className="text-center py-5">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
+          <>
+            {/* Header Skeleton */}
+            <div className="row mb-40">
+              <div className="col-12">
+                <div className="blog-section-header">
+                  <div 
+                    className="skeleton"
+                    style={{
+                      height: "50px",
+                      width: "150px",
+                      marginBottom: "10px",
+                      borderRadius: "8px",
+                    }}
+                  />
+                  <div 
+                    className="skeleton"
+                    style={{
+                      height: "20px",
+                      width: "400px",
+                      borderRadius: "8px",
+                    }}
+                  />
+                </div>
+              </div>
             </div>
-            <p className="mt-3">Loading blogs...</p>
-          </div>
+
+            {/* Filter & Sort Bar Skeleton */}
+            <div className="row mb-50">
+              <div className="col-12">
+                <div
+                  className="d-flex justify-content-between align-items-center flex-wrap gap-3"
+                >
+                  {/* Categories Skeleton */}
+                  <div className="d-flex gap-2 flex-wrap">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div
+                        key={i}
+                        className="skeleton"
+                        style={{
+                          height: "40px",
+                          width: "120px",
+                          borderRadius: "50px",
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Sort Skeleton */}
+                  <div className="d-flex align-items-center gap-2">
+                    <div
+                      className="skeleton"
+                      style={{
+                        height: "20px",
+                        width: "60px",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    <div
+                      className="skeleton"
+                      style={{
+                        height: "36px",
+                        width: "120px",
+                        borderRadius: "8px",
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Blog Grid Skeleton */}
+            <div className="row g-4">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="col-xl-4 col-lg-4 col-md-6">
+                  <article
+                    className="blog-card"
+                    style={{
+                      background: "#fff",
+                      borderRadius: "16px",
+                      overflow: "hidden",
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    {/* Image Skeleton */}
+                    <div
+                      className="skeleton"
+                      style={{
+                        height: "240px",
+                        width: "100%",
+                        borderRadius: "0",
+                      }}
+                    />
+
+                    {/* Content Skeleton */}
+                    <div
+                      style={{
+                        padding: "24px",
+                        display: "flex",
+                        flexDirection: "column",
+                        flexGrow: 1,
+                      }}
+                    >
+                      {/* Meta Skeleton */}
+                      <div className="d-flex gap-3 mb-3">
+                        <div
+                          className="skeleton"
+                          style={{
+                            height: "16px",
+                            width: "100px",
+                            borderRadius: "4px",
+                          }}
+                        />
+                        <div
+                          className="skeleton"
+                          style={{
+                            height: "16px",
+                            width: "80px",
+                            borderRadius: "4px",
+                          }}
+                        />
+                      </div>
+
+                      {/* Title Skeleton */}
+                      <div
+                        className="skeleton mb-3"
+                        style={{
+                          height: "24px",
+                          width: "100%",
+                          borderRadius: "4px",
+                        }}
+                      />
+                      <div
+                        className="skeleton mb-3"
+                        style={{
+                          height: "24px",
+                          width: "80%",
+                          borderRadius: "4px",
+                        }}
+                      />
+
+                      {/* Excerpt Skeleton */}
+                      <div
+                        className="skeleton mb-2"
+                        style={{
+                          height: "16px",
+                          width: "100%",
+                          borderRadius: "4px",
+                        }}
+                      />
+                      <div
+                        className="skeleton mb-2"
+                        style={{
+                          height: "16px",
+                          width: "100%",
+                          borderRadius: "4px",
+                        }}
+                      />
+                      <div
+                        className="skeleton"
+                        style={{
+                          height: "16px",
+                          width: "60%",
+                          borderRadius: "4px",
+                        }}
+                      />
+                    </div>
+                  </article>
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         {/* Error State */}
@@ -98,183 +245,6 @@ const ModernBlogArea = () => {
         {/* Content - Only show when not loading */}
         {!loading && blogs.length > 0 && (
           <>
-            {/* Hero Section - Featured Blog */}
-            {featuredBlog && (
-              <div className="row mb-60">
-                <div className="col-12">
-                  <div
-                    className="blog-hero-section position-relative"
-                    onClick={() => handleBlogClick(featuredBlog)}
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                      borderRadius: "20px",
-                      padding: "80px 60px",
-                      minHeight: "400px",
-                      display: "flex",
-                      alignItems: "center",
-                      overflow: "hidden",
-                      cursor: "pointer",
-                      transition: "transform 0.3s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "scale(1.02)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "scale(1)";
-                    }}
-                  >
-                    {/* Blog Hero Image */}
-                    <div
-                      className="blog-hero-image"
-                      style={{
-                        position: "absolute",
-                        right: "0px",
-                        width: "40%",
-                        height: "100%",
-                        borderRadius: "16px",
-                        overflow: "hidden",
-                        zIndex: 1,
-                      }}
-                    >
-                      <Image
-                        src={featuredBlog.imageUrl || blog_thumb_fallback}
-                        alt={featuredBlog.title}
-                        fill
-                        style={{ 
-                          objectFit: "cover",
-                          transition: "transform 0.3s ease"
-                        }}
-                        onError={(e) => {
-                          e.currentTarget.src = blog_thumb_fallback.src;
-                        }}
-                      />
-                      {/* Subtle overlay for better integration */}
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          background: "rgba(102, 126, 234, 0.1)",
-                          mixBlendMode: "multiply"
-                        }}
-                      />
-                    </div>
-
-                    <div
-                      className="blog-hero-content"
-                      style={{ maxWidth: "500px", zIndex: 2 }}
-                    >
-                      <span
-                        className="blog-hero-badge"
-                        style={{
-                          background: "rgba(255,255,255,0.2)",
-                          padding: "8px 20px",
-                          borderRadius: "50px",
-                          color: "#fff",
-                          fontSize: "14px",
-                          fontWeight: "500",
-                          display: "inline-block",
-                          marginBottom: "20px",
-                        }}
-                      >
-                        Featured Article
-                      </span>
-                      <h1
-                        className="blog-hero-title"
-                        style={{
-                          color: "#fff",
-                          fontSize: "48px",
-                          fontWeight: "700",
-                          lineHeight: "1.2",
-                          marginBottom: "20px",
-                        }}
-                      >
-                        {featuredBlog.title}
-                      </h1>
-                      <p
-                        className="blog-hero-desc"
-                        style={{
-                          color: "rgba(255,255,255,0.9)",
-                          fontSize: "16px",
-                          lineHeight: "1.6",
-                          marginBottom: "30px",
-                        }}
-                      >
-                        {featuredBlog.summary}
-                      </p>
-                      <div
-                        className="blog-hero-meta"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "20px",
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "10px",
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: "40px",
-                              height: "40px",
-                              borderRadius: "50%",
-                              background: "#fff",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <span
-                              style={{
-                                fontSize: "14px",
-                                fontWeight: "600",
-                                color: "#667eea",
-                              }}
-                            >
-                              {getAuthorInitials(featuredBlog)}
-                            </span>
-                          </div>
-                          <span
-                            style={{
-                              color: "#fff",
-                              fontSize: "14px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            {getAuthorName(featuredBlog)}
-                          </span>
-                        </div>
-                        <span
-                          style={{
-                            color: "rgba(255,255,255,0.8)",
-                            fontSize: "14px",
-                          }}
-                        >
-                          {blogService.formatDate(featuredBlog.createdAt)}
-                        </span>
-                        <span
-                          style={{
-                            color: "rgba(255,255,255,0.8)",
-                            fontSize: "14px",
-                          }}
-                        >
-                          {blogService.calculateReadTime(featuredBlog.content)}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Blog Header */}
             <div className="row mb-40">
               <div className="col-12">
@@ -282,7 +252,7 @@ const ModernBlogArea = () => {
                   <h2
                     className="blog-section-title"
                     style={{
-                      fontSize: "36px",
+                      fontSize: "50px",
                       fontWeight: "700",
                       marginBottom: "10px",
                     }}
@@ -748,13 +718,6 @@ const ModernBlogArea = () => {
           </div>
         )}
       </div>
-
-      {/* Blog Modal */}
-      <BlogModal
-        blog={selectedBlog}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
     </section>
   );
 };

@@ -5,103 +5,13 @@ import { useSearchParams } from "next/navigation";
 import PrevDetailsIcon from "@/svg/blogs_icon/PrevDetailsIcon";
 import NextDetailsIcon from "@/svg/blogs_icon/NextDetailsIcon";
 import Image from "next/image";
-import box_thumb from "@/assets/img/blog/post-box-thumb-1.jpg";
 import PostComments from "./PostComments";
 import SocialLinks from "@/components/common/social-links";
 import CommentForm from "@/components/forms/CommentForm";
 import BlogSidebar from "@/components/inner-pages/blog-sidebar";
 import { blogService, Blog } from "@/services/blogService";
+import BreadcrumbTen from "@/components/common/breadcrumb/breadcrumb-10";
 
-const BlogDetailsPostboxAreaContent = {
-  des_1: (
-    <>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit lobortis arcu enim
-      urna adipiscing praesent velit viverra sit semper lorem eu cursus vel
-      hendrerit elementum morbi curabitur etiam nibh justo, lorem aliquet donec
-      sed sit mi dignissim at ante massa mattis.If you see whence all this born
-      error is the pleasure of those who accuse and those who praise pain, I
-      will open the whole matter, and I will explain the very things which were
-      said by that discoverer of truth and, as it were, the architect of a happy
-      life. For no one despises or hates or runs away from pleasure because it
-      is pleasure, but because great pains result to those who do not know how
-      to follow pleasure with reason.
-    </>
-  ),
-  title_1: "Quidem Facere aut Veritatis Saepe Quia Molestias Voluptatem.",
-  des_2: (
-    <>
-      I will explain. For no one despises or hates or runs away from pleasure
-      because it is pleasure, because great pains result to those who do not
-      know how to follow pleasure with reason. Nor, moreoveris there any one
-      who, because he likes pain, pursues it, wants to gain it, but because such
-      times never occur in which he seeks some great pleasure through labor and
-      pain.
-    </>
-  ),
-  quote_title:
-    "“Success is the result of perfection, hard work, learning from failure, loyalty, and persistence”",
-  title_2: " Set Up Google Search Console",
-  des_3: (
-    <>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit lobortis arcu enim
-      urna adipiscing praesent velit viverra sit semper lorem eu cursus vel
-      hendrerit elementum morbi curabitur etiam nibh justo, lorem aliquet donec
-      sed sit mi dignissim at ante massa mattis.
-    </>
-  ),
-  quote_writer: "Guy Hawkins",
-  des_4: (
-    <>
-      Even if you don’t have directories you want to disallow from indexing,
-      having a robots.txt file is a best practice since it also points crawl
-      bots to your sitemap.Not sure if you already have a robots.txt file? Go to
-      yourdomain.com/robots.txt. If you see a file, you’re all set. If not,
-      Yoast can help you generate one, or you can manually create one using a
-      text editor and upload it to the root of your domain. Once your file is in
-      place, use Google’s tester tool to verify everything works correctly.
-    </>
-  ),
-  title_3: "Set Up Google Search Console",
-  des_5: (
-    <>
-      Pug twee fam pour-over seitan single-origin coffee crucifix blue bottle
-      aesthetic flexitarian. Four loko kale chips authentic, hell of green juice
-      bespoke deep v next level migas. Woke bushwick prism live edge austin tote
-      bag.
-    </>
-  ),
-  title_4: "Recommended Reading",
-  fetures_list: [
-    "Google Analytics Starter Guide — Best Beginner SEO Reports",
-    "How To Add a User to Google Analytics",
-    "How To Measure Website Traffic with Google Analytics",
-    "How To Track SEO Conversions: 10 Metrics To Measure",
-    "How To Set Up Google Analytics Goals",
-  ],
-  tags_list: [
-    "Technology",
-    "Envato",
-    "Keywords",
-    "SEO",
-    "WordPress",
-    "SEO Report",
-  ],
-};
-const {
-  des_1,
-  title_1,
-  des_2,
-  quote_title,
-  title_2,
-  des_3,
-  quote_writer,
-  des_4,
-  title_3,
-  des_5,
-  title_4,
-  fetures_list,
-  tags_list,
-} = BlogDetailsPostboxAreaContent;
 
 const BlogDetailsPostboxArea = () => {
   const searchParams = useSearchParams();
@@ -152,17 +62,107 @@ const BlogDetailsPostboxArea = () => {
   };
   return (
     <>
-      <section className="postbox-area mt-90 pb-120">
+      <section className="postbox-area mt-40 pb-120">
         <div className="container">
+          {!loading && blog ? (
+            <BreadcrumbTen 
+              author={getAuthorName()} 
+              time={blogService.formatDate(blog.createdAt)} 
+              views={blogService.calculateReadTime(blog.content)} 
+              title={blog.title}
+            />
+          ) : loading ? (
+            <div className="mb-4">
+              <div className="skeleton" style={{ height: '60px', width: '100%', borderRadius: '8px', marginBottom: '20px' }} />
+            </div>
+          ) : null}
           <div className="row">
             <div className="col-lg-8">
-              {/* Loading State */}
+              {/* Loading State - Skeleton */}
               {loading && (
-                <div className="text-center py-5">
-                  <div className="spinner-border text-primary" role="status">
-                    <span className="visually-hidden">Loading...</span>
+                <div className="postbox-area-wrap">
+                  <div className="postbox-main">
+                    {/* Blog Image Skeleton */}
+                    <div className="mb-40">
+                      <div className="skeleton" style={{ height: '450px', width: '100%', borderRadius: '8px' }} />
+                    </div>
+
+                    {/* Blog Title Skeleton */}
+                    <div className="mb-30">
+                      <div className="skeleton mb-2" style={{ height: '40px', width: '100%', borderRadius: '8px' }} />
+                      <div className="skeleton" style={{ height: '40px', width: '80%', borderRadius: '8px' }} />
+                    </div>
+
+                    {/* Blog Summary Skeleton */}
+                    <div className="mb-30" style={{
+                      background: '#f8f9fa',
+                      padding: '20px 24px',
+                      borderRadius: '8px',
+                      borderLeft: '4px solid #e0e0e0'
+                    }}>
+                      <div className="skeleton mb-2" style={{ height: '20px', width: '100%', borderRadius: '4px' }} />
+                      <div className="skeleton mb-2" style={{ height: '20px', width: '100%', borderRadius: '4px' }} />
+                      <div className="skeleton" style={{ height: '20px', width: '70%', borderRadius: '4px' }} />
+                    </div>
+
+                    {/* Blog Content Skeleton */}
+                    <div className="mb-40">
+                      <div className="skeleton mb-3" style={{ height: '20px', width: '100%', borderRadius: '4px' }} />
+                      <div className="skeleton mb-3" style={{ height: '20px', width: '100%', borderRadius: '4px' }} />
+                      <div className="skeleton mb-3" style={{ height: '20px', width: '100%', borderRadius: '4px' }} />
+                      <div className="skeleton mb-3" style={{ height: '20px', width: '95%', borderRadius: '4px' }} />
+                      <div className="skeleton mb-3" style={{ height: '20px', width: '100%', borderRadius: '4px' }} />
+                      <div className="skeleton mb-3" style={{ height: '20px', width: '100%', borderRadius: '4px' }} />
+                      <div className="skeleton mb-3" style={{ height: '20px', width: '90%', borderRadius: '4px' }} />
+                      <div className="skeleton mb-3" style={{ height: '20px', width: '100%', borderRadius: '4px' }} />
+                      <div className="skeleton mb-3" style={{ height: '20px', width: '100%', borderRadius: '4px' }} />
+                      <div className="skeleton" style={{ height: '20px', width: '85%', borderRadius: '4px' }} />
+                    </div>
+
+                    {/* Navigation Skeleton */}
+                    <div className="row align-items-center mt-60 mb-60">
+                      <div className="col-md-6">
+                        <div className="d-flex align-items-center gap-3">
+                          <div className="skeleton" style={{ height: '40px', width: '40px', borderRadius: '8px' }} />
+                          <div className="flex-grow-1">
+                            <div className="skeleton mb-2" style={{ height: '16px', width: '120px', borderRadius: '4px' }} />
+                            <div className="skeleton" style={{ height: '14px', width: '150px', borderRadius: '4px' }} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="d-flex align-items-center gap-3 justify-content-md-end">
+                          <div className="flex-grow-1 text-end">
+                            <div className="skeleton mb-2 ms-auto" style={{ height: '16px', width: '100px', borderRadius: '4px', marginLeft: 'auto' }} />
+                            <div className="skeleton ms-auto" style={{ height: '14px', width: '130px', borderRadius: '4px', marginLeft: 'auto' }} />
+                          </div>
+                          <div className="skeleton" style={{ height: '40px', width: '40px', borderRadius: '8px' }} />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Author Box Skeleton */}
+                    <div className="d-flex gap-4 mb-5">
+                      <div className="skeleton" style={{ 
+                        width: '100px', 
+                        height: '100px', 
+                        borderRadius: '50%',
+                        flexShrink: 0
+                      }} />
+                      <div className="flex-grow-1">
+                        <div className="skeleton mb-2" style={{ height: '14px', width: '120px', borderRadius: '4px' }} />
+                        <div className="skeleton mb-3" style={{ height: '24px', width: '180px', borderRadius: '4px' }} />
+                        <div className="skeleton mb-2" style={{ height: '16px', width: '100%', borderRadius: '4px' }} />
+                        <div className="skeleton mb-2" style={{ height: '16px', width: '100%', borderRadius: '4px' }} />
+                        <div className="skeleton mb-3" style={{ height: '16px', width: '80%', borderRadius: '4px' }} />
+                        <div className="d-flex gap-2">
+                          {[1, 2, 3, 4].map((i) => (
+                            <div key={i} className="skeleton" style={{ height: '32px', width: '32px', borderRadius: '50%' }} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p className="mt-3">Loading blog...</p>
                 </div>
               )}
 
@@ -190,18 +190,6 @@ const BlogDetailsPostboxArea = () => {
                       </div>
                     )}
 
-                    {/* Blog Meta */}
-                    <div className="postbox-meta mb-30">
-                      <span style={{ marginRight: '20px' }}>
-                        <i className="far fa-calendar-check"></i> {blogService.formatDate(blog.createdAt)}
-                      </span>
-                      <span style={{ marginRight: '20px' }}>
-                        <i className="far fa-user"></i> {getAuthorName()}
-                      </span>
-                      <span>
-                        <i className="fal fa-clock"></i> {blogService.calculateReadTime(blog.content)}
-                      </span>
-                    </div>
 
                     {/* Blog Title */}
                     <h2 className="postbox-title mb-30" style={{ fontSize: '36px', fontWeight: '700' }}>
@@ -277,7 +265,7 @@ const BlogDetailsPostboxArea = () => {
                   </div>
 
                   {/* Author Box */}
-                  <div className="postbox-author d-flex mb-95">
+                  <div className="postbox-author d-flex">
                     <div className="postbox-author-thumb">
                       <div style={{
                         width: '100px',
@@ -308,13 +296,13 @@ const BlogDetailsPostboxArea = () => {
                   </div>
 
                   {/* Comments */}
-                  <div className="postbox-comment mb-100">
+                  {/* <div className="postbox-comment mb-100">
                     <h3 className="postbox-comment-title mb-35">3 Comments</h3>
                     <PostComments />
-                  </div>
+                  </div> */}
 
                   {/* Comment Form */}
-                  <div className="postbox-comment-form">
+                  {/* <div className="postbox-comment-form">
                     <h3 className="postbox-comment-form-title">
                       Leave a Comment
                     </h3>
@@ -323,7 +311,7 @@ const BlogDetailsPostboxArea = () => {
                       are marked *
                     </p>
                     <CommentForm />
-                  </div>
+                  </div> */}
                 </div>
               )}
             </div>
@@ -331,91 +319,6 @@ const BlogDetailsPostboxArea = () => {
           </div>
         </div>
       </section>
-
-      {/* Styles for blog content */}
-      <style jsx>{`
-        .blog-content h1 {
-          font-size: 32px;
-          font-weight: 700;
-          margin: 40px 0 20px;
-          color: #1a1a1a;
-        }
-
-        .blog-content h2 {
-          font-size: 28px;
-          font-weight: 700;
-          margin: 35px 0 18px;
-          color: #1a1a1a;
-        }
-
-        .blog-content h3 {
-          font-size: 24px;
-          font-weight: 600;
-          margin: 30px 0 16px;
-          color: #1a1a1a;
-        }
-
-        .blog-content p {
-          margin-bottom: 20px;
-          line-height: 1.8;
-        }
-
-        .blog-content ul,
-        .blog-content ol {
-          margin: 20px 0;
-          padding-left: 30px;
-        }
-
-        .blog-content li {
-          margin-bottom: 12px;
-          line-height: 1.7;
-        }
-
-        .blog-content strong {
-          font-weight: 600;
-          color: #1a1a1a;
-        }
-
-        .blog-content a {
-          color: #667eea;
-          text-decoration: underline;
-        }
-
-        .blog-content a:hover {
-          color: #764ba2;
-        }
-
-        .blog-content code {
-          background: #f5f5f5;
-          padding: 2px 6px;
-          border-radius: 4px;
-          font-family: 'Courier New', monospace;
-          font-size: 0.9em;
-        }
-
-        .blog-content pre {
-          background: #f5f5f5;
-          padding: 20px;
-          border-radius: 8px;
-          overflow-x: auto;
-          margin: 24px 0;
-        }
-
-        .blog-content blockquote {
-          border-left: 4px solid #667eea;
-          padding-left: 20px;
-          margin: 24px 0;
-          color: #555;
-          font-style: italic;
-        }
-
-        .blog-content img {
-          max-width: 100%;
-          height: auto;
-          border-radius: 12px;
-          margin: 24px 0;
-        }
-      `}</style>
     </>
   );
 };

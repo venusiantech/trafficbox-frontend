@@ -50,7 +50,7 @@ const FooterFour = () => {
                                             <SubcribeHomeFour />
                                     </div>
                                     <div className="footer-widget-social">
-                                        <SocialLinksTwo /> 
+                                        {/* <SocialLinksTwo />  */}
                                     </div>
                                 </div>
                             </div>
