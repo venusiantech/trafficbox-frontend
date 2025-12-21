@@ -35,12 +35,16 @@ const BlogModal = ({ blog, isOpen, onClose }: BlogModalProps) => {
 
   // Helper function to get author full name
   const getAuthorName = () => {
-    return `${blog.author.firstName} ${blog.author.lastName}`;
+    if (!blog.author) return "Anonymous";
+    return `${blog.author.firstName || "Unknown"} ${blog.author.lastName || "Author"}`;
   };
 
   // Helper function to get author initials
   const getAuthorInitials = () => {
-    return `${blog.author.firstName.charAt(0)}${blog.author.lastName.charAt(0)}`;
+    if (!blog.author) return "A";
+    const firstName = blog.author.firstName || "U";
+    const lastName = blog.author.lastName || "A";
+    return `${firstName.charAt(0)}${lastName.charAt(0)}`;
   };
 
   return (

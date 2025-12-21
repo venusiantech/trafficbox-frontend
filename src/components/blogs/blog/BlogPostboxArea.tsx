@@ -186,7 +186,8 @@ const BlogPostboxArea = () => {
 
   // Helper function to get author full name
   const getAuthorName = (blog: Blog) => {
-    return `${blog.author.firstName} ${blog.author.lastName}`;
+    if (!blog.author) return "Anonymous";
+    return `${blog.author.firstName || "Unknown"} ${blog.author.lastName || "Author"}`;
   };
 
   return (

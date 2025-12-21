@@ -15,7 +15,7 @@ export interface Blog {
     content: string;
     summary: string;
     imageUrl: string;
-    author: BlogAuthor;
+    author: BlogAuthor | null;
     order: number;
     createdAt: string;
     updatedAt: string;
