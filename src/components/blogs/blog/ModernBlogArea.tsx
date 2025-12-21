@@ -31,6 +31,7 @@ const ModernBlogArea = () => {
       try {
         setLoading(true);
         const response = await blogService.getPublicBlogs();
+        console.log("Fetched blogs:", response.blogs.length, "blogs");
         setBlogs(response.blogs);
         setError(null);
       } catch (err) {
@@ -45,10 +46,12 @@ const ModernBlogArea = () => {
   }, []);
 
 
-  // Filter blogs (skip featured blog in the grid)
-  const gridBlogs = blogs.slice(1);
-
-  const filteredPosts = gridBlogs;
+  // Show all blogs in the grid
+  const filteredPosts = blogs;
+  
+  // Debug logging
+  console.log("Total blogs:", blogs.length);
+  console.log("Filtered posts:", filteredPosts.length);
   // Handle blog click - navigate to blog details page
   const handleBlogClick = (blog: Blog) => {
     router.push(`/blog-details?slug=${blog.slug}`);

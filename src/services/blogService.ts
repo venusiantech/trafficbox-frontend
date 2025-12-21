@@ -1,6 +1,6 @@
 // Blog API Service
 
-const API_BASE_URL = 'https://trafficbox-backend-staging.up.railway.app/api';
+const API_BASE_URL = 'https://trafficbox-backend-production.up.railway.app/api';
 
 export interface BlogAuthor {
     _id: string;
