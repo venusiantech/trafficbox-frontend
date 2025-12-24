@@ -5,7 +5,7 @@ import SignOut from '@/components/inner-pages/sign-out';
 
 
 export const metadata = {
-    title: "Sign Out - Digital Marketing & SEO Agency Next js Template", 
+    title: "Sign Out - The Most Advanced Traffic Generator", 
 };
 const index = () => {
     return (

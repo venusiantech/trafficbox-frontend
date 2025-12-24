@@ -7,7 +7,7 @@ import FooterFour from '@/layout/footers/FooterFour';
 import HeaderFour from '@/layout/headers/HeaderFour'; 
 
 export const metadata = {
-    title: "Team Details - SEO Marketing - Digital Marketing & SEO Agency Next js Template", 
+    title: "Team Details - SEO Marketing - The Most Advanced Traffic Generator", 
 };
 
 const index = ({ params }: any) => {

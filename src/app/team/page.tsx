@@ -3,7 +3,7 @@ import Team from "@/components/inner-pages/team";
 import Wrapper from "@/layout/Wrapper";
 
 export const metadata = {
-  title: "Team - Digital Marketing & SEO Agency Next js Template", 
+  title: "Team - The Most Advanced Traffic Generator", 
 };
 const index = () => {
     return (

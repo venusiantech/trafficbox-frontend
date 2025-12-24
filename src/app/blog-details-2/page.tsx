@@ -3,7 +3,7 @@ import ScrollToTop from "@/components/common/scroll-to-top";
 import Wrapper from "@/layout/Wrapper";
 
 export const metadata = {
-    title: "Blog Details Two - SEO Marketing - Digital Marketing & SEO Agency Next js Template",
+    title: "Blog Details Two - SEO Marketing - The Most Advanced Traffic Generator",
 };
 
 const index = () => {

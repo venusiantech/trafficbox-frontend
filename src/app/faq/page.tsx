@@ -4,7 +4,7 @@ import Wrapper from "@/layout/Wrapper";
 
 
 export const metadata = {
-    title: "FAQ - SEO Marketing - Digital Marketing & SEO Agency Next js Template", 
+    title: "FAQ - SEO Marketing - The Most Advanced Traffic Generator", 
 };
 
 const index = () => {

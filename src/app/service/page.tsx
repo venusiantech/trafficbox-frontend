@@ -3,7 +3,7 @@ import Wrapper from '@/layout/Wrapper';
 import Service from '@/components/inner-pages/service';
 
 export const metadata = {
-    title: "Service - Digital Marketing & SEO Agency Next js Template", 
+    title: "Service - The Most Advanced Traffic Generator", 
 };
 const index = () => {
     return (

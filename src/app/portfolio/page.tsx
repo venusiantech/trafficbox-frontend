@@ -3,7 +3,7 @@ import Portfolio from "@/components/inner-pages/portfolio";
 import Wrapper from "@/layout/Wrapper";
 
 export const metadata = {
-    title: "Portfolio - Digital Marketing & SEO Agency Next js Template", 
+    title: "Portfolio - The Most Advanced Traffic Generator", 
 };
 const index = () => {
     return (

@@ -3,7 +3,7 @@ import Pricing from "@/components/inner-pages/pricing";
 import Wrapper from "@/layout/Wrapper";
 
 export const metadata = {
-    title: "Pricing - Digital Marketing & SEO Agency Next js Template", 
+    title: "Pricing - The Most Advanced Traffic Generator", 
 };
 
 const index = () => {

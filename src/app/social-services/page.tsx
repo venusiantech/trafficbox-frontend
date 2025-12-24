@@ -3,7 +3,7 @@ import Wrapper from "@/layout/Wrapper";
 import SocialServices from "@/components/services/social-services";
 
 export const metadata = {
-    title: "Link Building Services - Digital Marketing & SEO Agency Next js Template", 
+    title: "Link Building Services - The Most Advanced Traffic Generator", 
 };
 
 const index = () => {

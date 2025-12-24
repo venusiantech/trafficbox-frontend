@@ -3,7 +3,7 @@ import Wrapper from "@/layout/Wrapper";
 import MarketingAnalysis from "@/components/services/marketing-analysis";
 
 export const metadata = {
-    title: "Marketing analysis - Digital Marketing & SEO Agency Next js Template", 
+    title: "Marketing analysis - The Most Advanced Traffic Generator", 
 };
 const index = () => {
     return (
