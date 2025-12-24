@@ -192,12 +192,6 @@ const BlogDetailsPostboxArea = () => {
                       </div>
                     )}
 
-
-                    {/* Blog Title */}
-                    <h2 className="postbox-title mb-30" style={{ fontSize: '36px', fontWeight: '700' }}>
-                      {blog.title}
-                    </h2>
-
                     {/* Blog Summary */}
                     {blog.summary && (
                       <div className="postbox-single-box mb-30" style={{
