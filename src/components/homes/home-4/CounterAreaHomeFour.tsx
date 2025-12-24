@@ -23,7 +23,7 @@ const counter_data: counter_data_type[] = [
         id: 1, 
         icon: <SuccessfulIcon />,
         counter_number: 120,
-        title: "Successful Projects",
+        title: "Sites Ranked",
     },
     {
         id: 2, 

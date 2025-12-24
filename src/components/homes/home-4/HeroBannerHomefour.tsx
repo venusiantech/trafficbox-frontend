@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import Image from 'next/image';
 
-import shape_1 from "@/assets/img/banner/hero-bg-4.png";
+import shape_1 from "@/assets/img/banner/hero-bg-4-new.png";
 import shape_2 from "@/assets/img/shape/banner-4-shape-1.png";
 import shape_3 from "@/assets/img/shape/banner-4-shape-2.png";
 import shape_4 from "@/assets/img/shape/banner-shape-4-1.png";
@@ -32,9 +32,9 @@ type hero_content_type = {
 }
 
 const hero_content: hero_content_type = {
-	title: <>All in one SEO for your business to give real impact <br /> consultancy and analysis.!</>,
+	title: <>Get high-quality website traffic and actionable SEO insights that help your business rank better, convert more users, and scale sustainably.</>,
 	questions: "Got Questions?",
-	phone: "+800 2563 123",
+	phone: "+971 50 678 6352",
 }
 const {title, questions, phone} = hero_content
 
@@ -49,16 +49,16 @@ const HeroBannerHomefour = () => {
 							<div className="banner-4">
 								<div className="banner-4-content">
 									<h4 className="banner-4-title cd-headline clip is-full-width">
-										SEO marketing <br />
+										TrafficBoxes, <br />
 										<span className="cd-words-wrapper">
 											<TypeAnimation
 												sequence={[
-													'agency',
-													1000,
-													'analysis',
-													1000,
-													'value',
-													1000,
+													'Drive Traffic',
+													500,
+													'Rank Higher',
+													500,
+													'Grow Faster',
+													500,
 												]}
 												wrapper="b"
 												speed={5}
@@ -66,11 +66,10 @@ const HeroBannerHomefour = () => {
 												repeat={Infinity}
 											/>
 										</span>
-										in UK
 									</h4>
 									<p>{title}</p>
 									<div className="banner-4-btn mb-30">
-										<Link href="/contact" className="blue-btn">Get Started Now</Link>
+										<Link href="https://app.trafficboxes.com/en/auth/register" className="blue-btn">Get Started Now</Link>
 									</div>
 									<div className="contact-4 d-flex align-items-center">
 										<div className="contact-4-icon">

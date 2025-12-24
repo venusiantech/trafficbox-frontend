@@ -56,7 +56,7 @@ const OffcanvasArea = ({ openCanvas, setOpenCanvas }: any) => {
 								</div>
 								<div className="offcanvas__contact mb-40">
 									<p className="offcanvas__contact-call"><a href="tel:+964-742-44-763">+964 742 44 763</a></p>
-									<p className="offcanvas__contact-mail"><a href="mailto:info@Trafficboxes.com">info@Trafficboxes.com</a></p>
+									<p className="offcanvas__contact-mail"><a href="mailto:connect@trafficboxes.com">connect@trafficboxes.com</a></p>
 								</div>
 								<div className="offcanvas__social">
 									<a href="#"><i className="fab fa-facebook-f"></i></a>

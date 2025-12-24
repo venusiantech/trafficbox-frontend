@@ -29,10 +29,10 @@ const HomeFour = () => {
         {/* <PortfolioAreaHomeFour /> */}
         <PricingAreaHomeFour />
         {/* <TestimonialAreaHomeFour /> */}
-        <ReviewAreaHomeFour />
+        {/* <ReviewAreaHomeFour /> */}
         <ContactAreaHomeFour />
         <BlogAreaHomeFour />
-        <AwardAreaHomeFour />
+        {/* <AwardAreaHomeFour /> */}
       </main>
       <FooterFour />
     </>

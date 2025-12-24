@@ -15,11 +15,13 @@ type optimize_content_type = {
 }
 // optimize content
 const optimize_content: optimize_content_type = {
-    sub_title: "Looking for best SEO results?",
-    title: <>Organic Search <br /> Engine Optimisation</>,
-    sm_info: <>So I said down the you owt to do with me absolutely bladdered, <br /> amongst what a plonker brolly baking.</>,
-    score: "Desktop Score",
-    skill: "Development Skill",
+    sub_title: "Looking for Better Search Performance?",
+    title: <>Organic SEO & <br /> Traffic Solutions</>,
+    sm_info: <>We analyze your website’s organic performance, <br /> 
+    keywords, competitors, and technical health to uncover exactly <br />
+     what’s limiting your rankings—and how to fix it.</>,
+    score: "Keyword Rankings",
+    skill: "Technical Health",
 }
 const {sub_title, title, sm_info, score, skill}  = optimize_content
 
@@ -94,11 +96,11 @@ const OptimizeAreaHomeFour = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="optimize-btn">
+                  {/* <div className="optimize-btn">
                     <Link className="blue-btn" href="/keyword-search">
                       Discover More
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="col-lg-6">

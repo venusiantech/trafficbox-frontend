@@ -19,8 +19,8 @@ const feature_content = {
 			cls: "p-relative d-flex",
 			icon: <BgColorIcon />,
 			sirial_no: "01",
-			title: "Creative Ideas",
-			sm_des: <>Keyword research and other market <br /> research under the SEO analytics <br /> umbrella.</>,
+			title: "Research & Strategy",
+			sm_des: <>We analyze keywords, competitors,and market <br /> trends to build a strong SEO-driven growth <br /> strategy.</>,
 			shape: <RoundShape />,
 			shape_cls: "1 d-none d-md-block"
 		},
@@ -30,7 +30,7 @@ const feature_content = {
 			icon: <BgColorIconTwo />,
 			sirial_no: "02",
 			title: "Data Collection",
-			sm_des: <>Keyword research and other market <br /> research under the SEO analytics <br /> umbrella.</>,
+			sm_des: <>We gather and process traffic, ranking, and <br /> performance data to uncover actionable opportunities.</>,
 			shape: <RoundShapeTwo />,
 			shape_cls: "2 d-none d-md-block"
 		},
@@ -39,8 +39,8 @@ const feature_content = {
 			cls: "pl-30 d-flex",
 			icon: <BgColorIconThree />,
 			sirial_no: "03",
-			title: "Targeting",
-			sm_des: <>Keyword research and other market <br /> research under the SEO analytics <br /> umbrella.</>,
+			title: "Precise Targeting",
+			sm_des: <>We target the right audience using data-backed SEO and traffic strategies to maximize visibility and conversions.</>,
 			// shape: ,
 			// shape_cls: ""
 		},

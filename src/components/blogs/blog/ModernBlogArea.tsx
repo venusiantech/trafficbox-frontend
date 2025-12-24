@@ -7,7 +7,6 @@ import { blogService, Blog } from "@/services/blogService";
 
 // Fallback images
 import blog_thumb_fallback from "@/assets/img/blog/blog-1-bg-1.jpg";
-import avatar_placeholder from "@/assets/img/blog/comments/blog-avatar-1.png";
 
 const categories = [
   "All",

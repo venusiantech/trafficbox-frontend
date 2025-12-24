@@ -34,22 +34,22 @@ const service_content: service_content_type = {
             id: 1, 
             shape: service_shape_1,
             icon: <MarketingIcon />,
-            title: "Digital Marketing",
-            sm_des: "We develop digital strategies, products and services appreciated by clients.",
+            title: "Targeted Website Traffic",
+            sm_des: "Get real visitors tailored to your niche for better engagement.",
         },
         {
             id: 2, 
             shape: service_shape_2,
             icon: <SEOAnalyticsIcon />,
-            title: "SEO Analytics",
-            sm_des: "We develop digital strategies, products and services appreciated by clients.",
+            title: "SEO Analysis & Optimization",
+            sm_des: "Identify issues and boost rankings with expert SEO audits.",
         },
         {
             id: 3, 
             shape: service_shape_3,
             icon: <SocialMarketingIcon />,
-            title: "Social Marketing",
-            sm_des: "We develop digital strategies, products and services appreciated by clients.",
+            title: "And More",
+            sm_des: "Performance monitoring, strategies, and ongoing optimization.",
         },
     ],
     sm_info: <>You can also find our <Link href="/service"> Services <i className="d-none d-md-block"> <SmollRound /> </i> </Link> to contact for the consulting.</>,
@@ -92,7 +92,7 @@ const ServicesAreaHomeFour = ({style}: any) => {
                             </div>                
                         )} 
                     </div>
-                    {style ? "" : 
+                    {/* {style ? "" : 
                         <div className="row justify-content-center">
                             <div className="col-xl-6 col-lg-8 col-md-10">
                                 <div className="services-bottom text-center">
@@ -103,7 +103,7 @@ const ServicesAreaHomeFour = ({style}: any) => {
                                 </div>
                             </div>
                         </div>
-                    }
+                    } */}
                 </div>
             </section> 
         </>
