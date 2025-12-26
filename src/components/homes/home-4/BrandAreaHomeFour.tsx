@@ -3,13 +3,14 @@ import Image from "next/image";
 import Slider from "react-slick";
 import Wavify from 'react-wavify';
 // brands images
-import brand_log_1 from "@/assets/img/brand/logo-3-1.png";
-import brand_log_2 from "@/assets/img/brand/logo-3-2.png";
-import brand_log_3 from "@/assets/img/brand/logo-3-3.png";
-import brand_log_4 from "@/assets/img/brand/logo-3-4.png";
-import brand_log_5 from "@/assets/img/brand/logo-3-5.png";
+import brand_log_1 from "@/assets/img/brand/adcash.png";
+import brand_log_2 from "@/assets/img/brand/adsterra.png";
+import brand_log_3 from "@/assets/img/brand/evadav.png";
+import brand_log_4 from "@/assets/img/brand/ezoic.png";
+// import brand_log_5 from "@/assets/img/brand/mgid.png";
+import brand_log_6 from "@/assets/img/brand/propeller-ads.png";
 
-const brands_images = [brand_log_1, brand_log_2, brand_log_3, brand_log_4, brand_log_5, brand_log_1]
+const brands_images = [brand_log_1, brand_log_2, brand_log_3, brand_log_4, brand_log_6]
 
 const setting = {
 	dots: true,
@@ -77,8 +78,8 @@ const BrandAreaHomeFour = () => {
 							<div className="col-lg-12">
 								<Slider {...setting} className="tpbrand tpbrand-active-4 mb-170">
 									{brands_images.map((item, i) =>
-										<div key={i} className="tpbrand-item-4 mb-35">
-											<Image src={item} alt="theme-pure" />
+										<div key={i} className="tpbrand-item-4">
+											<Image src={item} alt="theme-pure"/>
 										</div>
 									)}
 								</Slider>

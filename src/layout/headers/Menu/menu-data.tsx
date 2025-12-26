@@ -101,15 +101,6 @@ const menu_data: menu_data_type[] = [
   //           { link: "/blog-masonry",       title: "Blog Masonry" },  
   //         ],
   //     },
-  //     {  
-  //       layout: [
-  //           { link: "/blog-list",          title: "Blog List" },  
-  //           { link: "/blog-details",       title: "Blog Details" },  
-  //           { link: "/blog-details-2",     title: "Blog Details Full Width" },  
-  //           { link: "/faq",                title: "FAQ" },  
-  //           { link: "/contact",            title: "Contact" },  
-  //         ],
-  //     }, 
   //   ],
   // },
   {

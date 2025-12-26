@@ -61,7 +61,7 @@ const BlogAreaHomeFour = () => {
                         </div>
                         <div className="col-lg-4">
                             <div className="blog-all-btn text-lg-end mb-40">
-                                <Link href="/blog-list" className="blue-btn">More Articles</Link>
+                                <Link href="/blog" className="blue-btn">More Articles</Link>
                             </div>
                         </div>
                     </div>
