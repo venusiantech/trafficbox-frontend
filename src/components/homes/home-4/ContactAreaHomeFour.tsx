@@ -30,7 +30,7 @@ const contact_content: contact_content_type ={
     sub_title: "Get in touch",
     title: <>Lets work <br />Together</>,
     sm_des: "Just tell us your requirements and we will help you!",
-    phone: "+971 50 678 6352",
+    phone: "+38 267 627 722",
     email: "connect@trafficboxes.com",
     cotact_shape: [
         {id: 1, img: contact_shape_1, cls: ""},
@@ -66,7 +66,7 @@ const ContactAreaHomeFour = () => {
                                 </div>
                                 <div className="tpcontact-4-content">
                                     <p>{sm_des}</p>
-                                    <a className="phone mb-5" href={`tel:${phone}`}>{phone}</a>
+                                    <a className="phone mb-3" href={`tel:${phone}`}><i className="fab fa-whatsapp text-success me-2"></i>{phone}</a>
                                     <a className="mail mb-35" href={`mailto:${email}`}>{email}</a>
                                     <div className="tpcontact-4-content-btn">
                                     <Link href="/contact">Call us Now</Link>

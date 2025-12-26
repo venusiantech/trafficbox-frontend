@@ -69,7 +69,7 @@ const BrandAreaHomeFour = () => {
 						<div className="row">
 							<div className="col-lg-12">
 								<div className="brand-wrapper text-center">
-									<h5 className="title">As Featured On:</h5>
+									<h5 className="title">As Supported by:</h5>
 								</div>
 							</div>
 						</div>

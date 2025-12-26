@@ -17,7 +17,7 @@ const contactContent: ContactContentType = {
     title: "Get in Touch",
     sm_info: <>If you need help with your account or have questions about credit sesame, please visit our Help center.</>,
     email: "connect@trafficboxes.com",
-    phone: "+1 415 704 6387",
+    phone: "+38 267 627 722",
     btn_text: "Contact Us",
 }
 
