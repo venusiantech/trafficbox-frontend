@@ -6,7 +6,7 @@ import BgColorIconThree from "@/svg/bg_color_shape/bg_color_icon_3";
 import shape_1 from "@/assets/img/shape/choose-shape-1.png";
 import shape_2 from "@/assets/img/shape/choose-shape-2.png";
 import shape_3 from "@/assets/img/shape/choose-shape-3.png";
-import banner_img from "@/assets/img/banner/choose-2.png";
+import banner_img from "@/assets/img/banner/choose-3.png";
 import RoundShape from "@/svg/bg_color_shape/round_shape_1";
 import RoundShapeTwo from "@/svg/bg_color_shape/round_shape_2";
 

@@ -28,7 +28,7 @@ interface service_content_type {
 const service_content: service_content_type = {
     sub_title: 'Why services Us',
     sub_title_2: "Why Choose Us",
-    title: "Our à services",
+    title: "Our services",
     service_data: [
         {
             id: 1, 
