@@ -24,16 +24,16 @@ const googleMapContent: GoogleMapContentType = {
         {
             id: 1, 
             icon: <LocationIconContact />,
-            country: "United Kingdom",
-            address: <>20 Great Marlborough Street, London, UK W18HU</>,
-            address_link: "https://www.google.com/maps/@40.7293795,-74.1369342,11z?hl=en&entry=ttu",
+            country: "USA",
+            address: <>3460 Kayla Circle, Oviedo, Orlando, FL 32765, USA</>,
+            address_link: "https://www.google.com/maps/place/3460+Kayla+Circle,+Oviedo,+FL+32765,+USA",
         },
         {
             id: 2, 
             icon: <LocationIconContact />,
-            country: "USA",
-            address: <>208 Hamilton Avenue, Palo Alto, California, 901</>,
-            address_link: "https://www.google.com/maps/@40.7293795,-74.1369342,11z?hl=en&entry=ttu",
+            country: "UAE",
+            address: <>2616 Court Tower, Business Bay, Dubai, UAE</>,
+            address_link: "https://www.google.com/maps/place/Court+Tower,+Business+Bay,+Dubai,+UAE",
         },
     ]
 }

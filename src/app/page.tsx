@@ -3,7 +3,7 @@ import ScrollToTop from "@/components/common/scroll-to-top";
 import Wrapper from "@/layout/Wrapper";
 
 export const metadata = {
-  title: "Trafficboxs.com - Digital Marketing & SEO Agency", 
+  title: "Trafficboxes.com - Digital Marketing & SEO Agency", 
 };
 const index = () => {
   return (

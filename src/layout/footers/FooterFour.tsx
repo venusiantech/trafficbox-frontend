@@ -5,7 +5,7 @@ import { SocialLinksTwo } from "@/components/common/social-links";
 import SubcribeHomeFour from "@/components/forms/SubcribeHomeFour";
 
  const footer_content = {
-    footer_info: <>Trafficboxs.com is your trusted partner <br /> for digital marketing and <br /> SEO solutions</>,
+    footer_info: <>trafficboxes.com is your trusted partner <br /> for digital marketing and <br /> SEO solutions</>,
     subcribe: "Subcribe.",
     title: "Only valuable resource no bullshit",
 
@@ -24,7 +24,7 @@ const FooterFour = () => {
                                 <div className="footer-widget footer-4-col-1 mb-30">
                                 <div className="footer-widget-logo mb-15">
                                     <Link href="/">
-                                        <span> <Image src="/logo/TrafficBoxes_Logo.png" alt="Trafficboxs.com" width={180} height={45} /> </span>
+                                        <span> <Image src="/logo/TrafficBoxes_Logo.png" alt="trafficboxes.com" width={180} height={45} /> </span>
                                     </Link>
                                 </div>
                                 <div className="footer-widget-content">
@@ -60,7 +60,7 @@ const FooterFour = () => {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="footer-widget-copyright footer-widget-copyright-4 text-center">
-                                    <span>© {new Date().getFullYear()} <Link href="/">Trafficboxs.com</Link> All Rights Reserved.</span>
+                                    <span>© {new Date().getFullYear()} <Link href="/">Trafficboxes.com</Link> All Rights Reserved.</span>
                                 </div>
                             </div>
                         </div>

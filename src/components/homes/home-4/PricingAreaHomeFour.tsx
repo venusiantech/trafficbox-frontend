@@ -255,7 +255,9 @@ const PricingAreaHomeFour = () => {
                                                              <div key={plan.planName} style={{ minWidth: '280px', maxWidth: '280px', flexShrink: 0 }}>
                                                                 <div className={btnClass}>
                                                                     <p>
-                                                                        <button>Join this Plan</button>
+                                                                        <a href="https://app.trafficboxes.com/en/auth/register">
+                                                                            <button>Join this Plan</button>
+                                                                        </a>
                                                                     </p>
                                                                 </div>
                                                             </div>
