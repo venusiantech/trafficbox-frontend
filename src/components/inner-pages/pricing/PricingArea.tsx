@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import PriceingContactus from "@/svg/inner-pages-icons/PriceingContactus";
+import { planService, Plan } from "@/services/planService";
 
 // data type
 interface price_content_type {
@@ -16,41 +17,60 @@ interface price_content_type {
         inner_y_price: JSX.Element;
     }[];
 }
-// price data
-const price_content: price_content_type  = {
-    title: "Plans & Pricing",
-    sm_info: "Stay cool, we have a 48-hour money back guarantee!",
-    contact_us: "Need Custom Us",
-    btn_text: "Contact Us",
-    priceing_list: [
-        {
-            id: 1, 
-            inner_head: "Beginner",
-            inner_title: "Essential",
-            inner_price: <><span>$</span>469<span>.06</span></>,
-            inner_y_price: <><span>$</span>599<span>.09</span></>,
-        },
-        {
-            id:  2, 
-            inner_head: "For Future",
-            inner_title: "Business",
-            inner_price: <><span>$</span>969<span>.06</span></>,
-            inner_y_price: <><span>$</span>999<span>.09</span></>,
-        },
-        {
-            id: 3, 
-            inner_head: "Mid size",
-            inner_title: "Pro",
-            inner_price: <><span>$</span>869<span>.06</span></>,
-            inner_y_price: <><span>$</span>789<span>.09</span></>,
-        },
-    ]
-}
-const {title, sm_info, contact_us, btn_text, priceing_list}  = price_content
 
 const PricingArea = () => {
-
     const [isMonthlyActive, setIsMonthlyActive] = useState(true);
+    const [plans, setPlans] = useState<Plan[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    // Static content
+    const price_content: price_content_type = {
+        title: "Plans & Pricing",
+        sm_info: "Stay cool, we have a 48-hour money back guarantee!",
+        contact_us: "Need Custom Us",
+        btn_text: "Contact Us",
+        priceing_list: []
+    };
+    const { title, sm_info, contact_us, btn_text } = price_content;
+
+    // Fetch plans on component mount
+    useEffect(() => {
+        const fetchPlans = async () => {
+            try {
+                setLoading(true);
+                const response = await planService.getPlans();
+                if (response.ok && response.plans) {
+                    setPlans(response.plans);
+                } else {
+                    setError('Failed to fetch plans');
+                }
+            } catch (err) {
+                console.error('Error fetching plans:', err);
+                setError('Failed to load plans. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPlans();
+    }, []);
+
+    // Transform plans to pricing list format
+    const priceing_list = plans.map((plan, index) => {
+        const monthlyPrice = plan.price;
+        const yearlyPrice = planService.calculateYearlyPrice(monthlyPrice);
+        const monthlyPriceParts = planService.formatPrice(monthlyPrice);
+        const yearlyPriceParts = planService.formatPrice(yearlyPrice);
+        
+        return {
+            id: index + 1,
+            inner_head: planService.formatPlanName(plan.planName),
+            inner_title: plan.description,
+            inner_price: <><span>$</span>{monthlyPriceParts.dollars}<span>.{monthlyPriceParts.cents}</span></>,
+            inner_y_price: <><span>$</span>{yearlyPriceParts.dollars}<span>.{yearlyPriceParts.cents}</span></>,
+        };
+    });
     const handleMonthlyClick = () => {
         setIsMonthlyActive(true);
     };
@@ -84,9 +104,93 @@ const PricingArea = () => {
         }
     }, [isMonthlyActive]);
 
+    if (loading) {
+        return (
+            <section className="pricing-area tp-inner-pricing-switch tp-price-parent mb-70">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="pricing-inner-wrapper text-center">
+                                <div className="pricing-inner-top">
+                                    <h4 className="pricing-inner-top-title">{title}</h4>
+                                    <p>Loading plans...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    if (error) {
+        return (
+            <section className="pricing-area tp-inner-pricing-switch tp-price-parent mb-70">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="pricing-inner-wrapper text-center">
+                                <div className="pricing-inner-top">
+                                    <h4 className="pricing-inner-top-title">{title}</h4>
+                                    <p style={{ color: 'red' }}>{error}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <>
+            <style dangerouslySetInnerHTML={{__html: `
+                .pricing-cards-wrapper {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                    justify-content: center;
+                }
+                @media (min-width: 992px) {
+                    .pricing-cards-wrapper > div {
+                        flex: 0 0 calc(20% - 12px);
+                        max-width: calc(20% - 12px);
+                    }
+                }
+                @media (min-width: 768px) and (max-width: 991px) {
+                    .pricing-cards-wrapper > div {
+                        flex: 0 0 calc(50% - 8px);
+                        max-width: calc(50% - 8px);
+                    }
+                }
+                @media (min-width: 576px) and (max-width: 767px) {
+                    .pricing-cards-wrapper > div {
+                        flex: 0 0 calc(50% - 8px);
+                        max-width: calc(50% - 8px);
+                    }
+                }
+                @media (max-width: 575px) {
+                    .pricing-cards-wrapper > div {
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                    }
+                }
+                .pricing-inner-item {
+                    font-size: 0.9em;
+                }
+                .pricing-inner-item .pricing-inner-head span {
+                    font-size: 0.9em;
+                }
+                .pricing-inner-item .pricing-inner-title span {
+                    font-size: 0.85em;
+                }
+                .pricing-inner-item .pricing-inner-price h4.pricing-inner-price-count {
+                    font-size: 2em;
+                }
+                .pricing-inner-item .pricing-inner-btn button {
+                    font-size: 0.9em;
+                }
+            `}} />
             <section className="pricing-area tp-inner-pricing-switch tp-price-parent mb-70">
                 <div className="container">
                     <div className="row">
@@ -99,7 +203,7 @@ const PricingArea = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-lg-12">
                             <div className="tpprice-switch text-center p-relative mb-55">
                                 <div className="tpprice-switch-wrapper d-flex align-items-center justify-content-center">
@@ -122,29 +226,16 @@ const PricingArea = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="tp-price-toggle">
                                 <div id="monthly" className={`wrapper-full ${isMonthlyActive ? "hide" : ""}`}>
                                     <div className="pricing-inner">
-                                        <div className="row">
-                                            <div className="col-lg-3 col-md-3">
-                                                <div className="pricing-custom text-center">
-                                                    <div className="pricing-custom-icon">
-                                                        <span> <PriceingContactus />  </span>
-                                                    </div>
-                                                    <div className="pricing-custom-content">
-                                                        <span>{contact_us}</span>
-                                                        <div className="pricing-inner-btn">
-                                                            <button className="tp-btn">{btn_text}</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div className="pricing-cards-wrapper">
                                             {priceing_list.map((item, i) => 
-                                                <div key={i} className="col-lg-3 col-md-3">
-                                                    <div className={`pricing-inner-item ${i === 1 ? "active" : ""} ${i === 2 ? "mr-45" : ""} text-center`}>
+                                                <div key={item.id}>
+                                                    <div className={`pricing-inner-item ${i === 2 ? "active" : ""} text-center h-100`}>
                                                         <div className="pricing-inner-head">
                                                             <span>{item.inner_head}</span>
                                                         </div>
@@ -165,23 +256,10 @@ const PricingArea = () => {
                                 </div>
                                 <div id="hourly" className={`wrapper-full ${isMonthlyActive ? "" : "hide"}`}>
                                     <div className="pricing-inner">
-                                        <div className="row">
-                                            <div className="col-lg-3 col-md-3">
-                                                <div className="pricing-custom text-center">
-                                                    <div className="pricing-custom-icon">
-                                                        <span><PriceingContactus /></span>
-                                                    </div>
-                                                    <div className="pricing-custom-content">
-                                                        <span>{contact_us}</span>
-                                                        <div className="pricing-inner-btn">
-                                                            <button className="tp-btn">{btn_text}</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div className="pricing-cards-wrapper">
                                             {priceing_list.map((item, i) => 
-                                                <div key={i} className="col-lg-3 col-md-3">
-                                                    <div className={`pricing-inner-item ${i === 1 ? "active" : ""} ${i === 2 ? "mr-45" : ""} text-center`}>
+                                                <div key={item.id}>
+                                                    <div className={`pricing-inner-item ${i === 2 ? "active" : ""} text-center h-100`}>
                                                         <div className="pricing-inner-head">
                                                             <span>{item.inner_head}</span>
                                                         </div>

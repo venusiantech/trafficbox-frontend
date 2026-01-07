@@ -1,6 +1,3 @@
-// Blog API Service
-
-const API_BASE_URL = 'https://trafficbox-backend-production.up.railway.app/api';
 
 export interface BlogAuthor {
     _id: string;
@@ -30,7 +27,7 @@ export const blogService = {
     // Fetch all public blogs
     async getPublicBlogs(): Promise<BlogsResponse> {
         try {
-            const response = await fetch(`${API_BASE_URL}/blogs/public`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/public`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
