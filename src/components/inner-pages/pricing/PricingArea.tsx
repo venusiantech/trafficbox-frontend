@@ -19,7 +19,7 @@ interface price_content_type {
 }
 
 const PricingArea = () => {
-    const [isMonthlyActive, setIsMonthlyActive] = useState(true);
+    const [isMonthlyActive, setIsMonthlyActive] = useState(false);
     const [plans, setPlans] = useState<Plan[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -106,7 +106,7 @@ const PricingArea = () => {
 
     if (loading) {
         return (
-            <section className="pricing-area tp-inner-pricing-switch tp-price-parent mb-70">
+            <section className="mt-90">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -125,7 +125,7 @@ const PricingArea = () => {
 
     if (error) {
         return (
-            <section className="pricing-area tp-inner-pricing-switch tp-price-parent mb-70">
+            <section className="mt-90">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -191,7 +191,7 @@ const PricingArea = () => {
                     font-size: 0.9em;
                 }
             `}} />
-            <section className="pricing-area tp-inner-pricing-switch tp-price-parent mb-70">
+            <section className="mt-90 mb-90"> 
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -251,30 +251,6 @@ const PricingArea = () => {
                                                     </div>
                                                 </div>                                            
                                             )} 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="hourly" className={`wrapper-full ${isMonthlyActive ? "" : "hide"}`}>
-                                    <div className="pricing-inner">
-                                        <div className="pricing-cards-wrapper">
-                                            {priceing_list.map((item, i) => 
-                                                <div key={item.id}>
-                                                    <div className={`pricing-inner-item ${i === 2 ? "active" : ""} text-center h-100`}>
-                                                        <div className="pricing-inner-head">
-                                                            <span>{item.inner_head}</span>
-                                                        </div>
-                                                        <div className="pricing-inner-title">
-                                                            <span>{item.inner_title}</span>
-                                                        </div>
-                                                        <div className="pricing-inner-price">
-                                                            <h4 className="pricing-inner-price-count">{item.inner_y_price}</h4>
-                                                        </div>
-                                                        <div className="pricing-inner-btn">
-                                                            <button>Get Now</button>
-                                                        </div>
-                                                    </div>
-                                                </div>                                            
-                                            )}  
                                         </div>
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-import BreadcrumbSix from "@/components/common/breadcrumb/breadcrumb-6";
+// import BreadcrumbSix from "@/components/common/breadcrumb/breadcrumb-6";
 // import FeatureAreaHomeFour from "@/components/homes/home-4/FeatureAreaHomeFour";
 import FooterFour from "@/layout/footers/FooterFour";
 import HeaderFour from "@/layout/headers/HeaderFour";
@@ -11,7 +11,7 @@ const Pricing = () => {
         <>
             <HeaderFour />
             <main>
-                <BreadcrumbSix />
+                {/* <BreadcrumbSix /> */}
                 <PricingArea />
                 <ComparisonArea />
                 {/* <BrandArea /> */}

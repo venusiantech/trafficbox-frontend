@@ -1,23 +1,24 @@
+"use client"
 import Link from "next/link";
-import KeywordSearchForm from "@/components/forms/KeywordSearchForm"; 
+import SEOAnalysisForm from "@/components/forms/SEOAnalysisForm"; 
 
 
-type keyword_content_type = {
+type seo_analysis_content_type = {
     title: string;
     sm_info: JSX.Element;
     tags: string[];
 }
-const keyword_content: keyword_content_type = {
-    title: "Competitor Analysis",
-    sm_info: <>Find the keywords your competitors rank for and analyze their data insights to uncover <br /> their SEO strategy in one click</>,
-    tags: ["merketing", "laptop", "iphone"]
+const seo_analysis_content: seo_analysis_content_type = {
+    title: "SEO Analysis",
+    sm_info: <>Get a comprehensive SEO analysis of any website. Analyze meta tags, content quality, <br /> performance metrics, and technical SEO factors in one click</>,
+    tags: ["https://example.com", "https://google.com", "https://github.com"]
 }
-const { title, sm_info, tags } = keyword_content
+const { title, sm_info, tags } = seo_analysis_content
 
 const KeywordArea = () => {
     return (
         <>
-            <section className="keyword-area keyword-inner-wrapper keyword-inner-bg pt-105 pb-120" style={{ backgroundImage: `url(/assets/img/shape/keyword-inner.png)` }}>
+            <section className="keyword-area keyword-inner-wrapper keyword-inner-bg pt-105 mb-90 pb-120" style={{ backgroundImage: `url(/assets/img/shape/keyword-inner.png)` }}>
                 <div className="keyword-inner-shape">
                     <div className="container">
                         <div className="row justify-content-center">
@@ -29,12 +30,8 @@ const KeywordArea = () => {
                                     </div>
                                     <div className="keyword-search mb-25">
                                         <div className="tpbanner__search">
-                                            <KeywordSearchForm />
+                                            <SEOAnalysisForm />
                                         </div>
-                                    </div>
-                                    <div className="keyword-search-tag">
-                                        <span>Try</span>
-                                        {tags.map((tag, i) => <Link key={i} href="/keyword-search">{tag}</Link>)}
                                     </div>
                                 </div>
                             </div>
