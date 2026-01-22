@@ -5,12 +5,15 @@ import { useSearchParams } from "next/navigation";
 import PrevDetailsIcon from "@/svg/blogs_icon/PrevDetailsIcon";
 import NextDetailsIcon from "@/svg/blogs_icon/NextDetailsIcon";
 import Image from "next/image";
-import PostComments from "./PostComments";
+// import PostComments from "./PostComments";
 import SocialLinks from "@/components/common/social-links";
-import CommentForm from "@/components/forms/CommentForm";
+// import CommentForm from "@/components/forms/CommentForm";
 import BlogSidebar from "@/components/inner-pages/blog-sidebar";
 import { blogService, Blog } from "@/services/blogService";
 import BreadcrumbTen from "@/components/common/breadcrumb/breadcrumb-10";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 
 const BlogDetailsPostboxArea = () => {
@@ -206,16 +209,153 @@ const BlogDetailsPostboxArea = () => {
                       </div>
                     )}
 
-                    {/* Blog Content */}
+                    {/* Blog Content - Markdown */}
                     <div 
-                      className="postbox-content blog-content"
-                      dangerouslySetInnerHTML={{ __html: blog.content }}
+                      className="postbox-content blog-content markdown-body"
                       style={{
                         fontSize: '17px',
                         lineHeight: '1.8',
                         color: '#333'
                       }}
-                    />
+                    >
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeHighlight]}
+                        components={{
+                          h1: ({ children }) => (
+                            <h1 style={{ fontSize: '2.25rem', fontWeight: '700', marginTop: '2rem', marginBottom: '1rem', color: '#1a1a1a', lineHeight: '1.3' }}>{children}</h1>
+                          ),
+                          h2: ({ children }) => (
+                            <h2 style={{ fontSize: '1.75rem', fontWeight: '600', marginTop: '1.75rem', marginBottom: '0.875rem', color: '#1a1a1a', lineHeight: '1.35', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.5rem' }}>{children}</h2>
+                          ),
+                          h3: ({ children }) => (
+                            <h3 style={{ fontSize: '1.375rem', fontWeight: '600', marginTop: '1.5rem', marginBottom: '0.75rem', color: '#1a1a1a', lineHeight: '1.4' }}>{children}</h3>
+                          ),
+                          h4: ({ children }) => (
+                            <h4 style={{ fontSize: '1.125rem', fontWeight: '600', marginTop: '1.25rem', marginBottom: '0.625rem', color: '#1a1a1a', lineHeight: '1.45' }}>{children}</h4>
+                          ),
+                          p: ({ children }) => (
+                            <p style={{ marginBottom: '1.25rem', lineHeight: '1.8', color: '#374151' }}>{children}</p>
+                          ),
+                          ul: ({ children }) => (
+                            <ul style={{ marginBottom: '1.25rem', paddingLeft: '1.5rem', listStyleType: 'disc' }}>{children}</ul>
+                          ),
+                          ol: ({ children }) => (
+                            <ol style={{ marginBottom: '1.25rem', paddingLeft: '1.5rem', listStyleType: 'decimal' }}>{children}</ol>
+                          ),
+                          li: ({ children }) => (
+                            <li style={{ marginBottom: '0.5rem', lineHeight: '1.7', color: '#374151' }}>{children}</li>
+                          ),
+                          blockquote: ({ children }) => (
+                            <blockquote style={{
+                              borderLeft: '4px solid #667eea',
+                              paddingLeft: '1.25rem',
+                              marginLeft: '0',
+                              marginRight: '0',
+                              marginBottom: '1.25rem',
+                              fontStyle: 'italic',
+                              color: '#4b5563',
+                              background: '#f9fafb',
+                              padding: '1rem 1.25rem',
+                              borderRadius: '0 8px 8px 0'
+                            }}>{children}</blockquote>
+                          ),
+                          code: ({ className, children, ...props }) => {
+                            const isInline = !className;
+                            if (isInline) {
+                              return (
+                                <code style={{
+                                  background: '#f3f4f6',
+                                  padding: '0.2rem 0.4rem',
+                                  borderRadius: '4px',
+                                  fontSize: '0.875em',
+                                  color: '#e11d48',
+                                  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
+                                }} {...props}>{children}</code>
+                              );
+                            }
+                            return (
+                              <code className={className} style={{
+                                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                                fontSize: '0.875rem'
+                              }} {...props}>{children}</code>
+                            );
+                          },
+                          pre: ({ children }) => (
+                            <pre style={{
+                              background: '#1f2937',
+                              color: '#f9fafb',
+                              padding: '1.25rem',
+                              borderRadius: '8px',
+                              overflow: 'auto',
+                              marginBottom: '1.25rem',
+                              fontSize: '0.875rem',
+                              lineHeight: '1.6'
+                            }}>{children}</pre>
+                          ),
+                          a: ({ href, children }) => (
+                            <a href={href} style={{
+                              color: '#667eea',
+                              textDecoration: 'none',
+                              borderBottom: '1px solid transparent',
+                              transition: 'border-color 0.2s ease'
+                            }} onMouseEnter={(e) => e.currentTarget.style.borderBottomColor = '#667eea'}
+                               onMouseLeave={(e) => e.currentTarget.style.borderBottomColor = 'transparent'}
+                            >{children}</a>
+                          ),
+                          img: ({ src, alt }) => (
+                            <span style={{ display: 'block', marginBottom: '1.25rem' }}>
+                              <Image
+                                src={src || ''}
+                                alt={alt || ''}
+                                width={800}
+                                height={450}
+                                style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+                              />
+                            </span>
+                          ),
+                          table: ({ children }) => (
+                            <div style={{ overflowX: 'auto', marginBottom: '1.25rem' }}>
+                              <table style={{
+                                width: '100%',
+                                borderCollapse: 'collapse',
+                                fontSize: '0.9375rem'
+                              }}>{children}</table>
+                            </div>
+                          ),
+                          th: ({ children }) => (
+                            <th style={{
+                              background: '#f3f4f6',
+                              padding: '0.75rem 1rem',
+                              textAlign: 'left',
+                              fontWeight: '600',
+                              borderBottom: '2px solid #e5e7eb'
+                            }}>{children}</th>
+                          ),
+                          td: ({ children }) => (
+                            <td style={{
+                              padding: '0.75rem 1rem',
+                              borderBottom: '1px solid #e5e7eb'
+                            }}>{children}</td>
+                          ),
+                          hr: () => (
+                            <hr style={{
+                              border: 'none',
+                              borderTop: '2px solid #e5e7eb',
+                              margin: '2rem 0'
+                            }} />
+                          ),
+                          strong: ({ children }) => (
+                            <strong style={{ fontWeight: '600', color: '#1a1a1a' }}>{children}</strong>
+                          ),
+                          em: ({ children }) => (
+                            <em style={{ fontStyle: 'italic' }}>{children}</em>
+                          )
+                        }}
+                      >
+                        {blog.content}
+                      </ReactMarkdown>
+                    </div>
                   </div>
 
                   {/* Navigation - Previous/Next */}

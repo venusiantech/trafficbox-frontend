@@ -7,5 +7,8 @@
 @import "slick-carousel/slick/slick.css";
 @import "~bootstrap/scss/bootstrap";
 
+// Syntax highlighting for code blocks
+@import "highlight.js/styles/github-dark.css";
+
 @import "../../public/assets/scss/main.scss";
 @import "./modern-blog.scss";

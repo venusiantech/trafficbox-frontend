@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { blogService, Blog } from "@/services/blogService";
+import ReactMarkdown from "react-markdown";
 
 // Fallback images
 import blog_thumb_fallback from "@/assets/img/blog/blog-1-bg-1.jpg";
@@ -523,7 +524,7 @@ const ModernBlogArea = () => {
             </div>
 
             {/* Pagination */}
-            <div className="row mt-60">
+            <div className="row pt-80">
               <div className="col-12">
                 <div
                   className="blog-pagination"

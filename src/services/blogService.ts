@@ -72,15 +72,45 @@ export const blogService = {
     // Helper function to calculate read time based on content
     calculateReadTime(content: string): string {
         const wordsPerMinute = 200;
-        const text = content.replace(/<[^>]*>/g, ''); // Remove HTML tags
-        const wordCount = text.split(/\s+/).length;
+        // Remove markdown syntax for accurate word count
+        const text = this.stripMarkdown(content);
+        const wordCount = text.split(/\s+/).filter(word => word.length > 0).length;
         const minutes = Math.ceil(wordCount / wordsPerMinute);
         return `${minutes} min${minutes > 1 ? 's' : ''} read`;
     },
 
-    // Extract plain text excerpt from HTML content
+    // Strip markdown syntax to get plain text
+    stripMarkdown(content: string): string {
+        return content
+            // Remove code blocks
+            .replace(/```[\s\S]*?```/g, '')
+            .replace(/`[^`]*`/g, '')
+            // Remove headers
+            .replace(/^#{1,6}\s+/gm, '')
+            // Remove bold/italic
+            .replace(/\*\*([^*]+)\*\*/g, '$1')
+            .replace(/\*([^*]+)\*/g, '$1')
+            .replace(/__([^_]+)__/g, '$1')
+            .replace(/_([^_]+)_/g, '$1')
+            // Remove links but keep text
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+            // Remove images
+            .replace(/!\[([^\]]*)\]\([^)]+\)/g, '')
+            // Remove blockquotes
+            .replace(/^>\s+/gm, '')
+            // Remove horizontal rules
+            .replace(/^[-*_]{3,}\s*$/gm, '')
+            // Remove list markers
+            .replace(/^[\s]*[-*+]\s+/gm, '')
+            .replace(/^[\s]*\d+\.\s+/gm, '')
+            // Clean up extra whitespace
+            .replace(/\n{3,}/g, '\n\n')
+            .trim();
+    },
+
+    // Extract plain text excerpt from markdown content
     getExcerpt(content: string, maxLength: number = 150): string {
-        const text = content.replace(/<[^>]*>/g, ''); // Remove HTML tags
+        const text = this.stripMarkdown(content);
         if (text.length <= maxLength) return text;
         return text.substring(0, maxLength).trim() + '...';
     }
