@@ -4,7 +4,42 @@ import Wrapper from "@/layout/Wrapper";
 import Script from "next/script";
 
 export const metadata = {
-  title: "Trafficboxes.com - Digital Marketing & SEO Agency", 
+  title: "TrafficBoxes - Buy Organic Traffic & AI-Powered SEO Audits",
+  description: "Purchase high-quality organic website traffic and get comprehensive AI-powered SEO audits. Advanced artificial intelligence technology for deep website analysis and targeted organic visitor generation.",
+  keywords: [
+    'buy organic traffic',
+    'organic website traffic for sale',
+    'AI SEO audit',
+    'AI-powered SEO analysis',
+    'purchase organic visitors',
+    'targeted website traffic',
+    'artificial intelligence SEO audit',
+    'deep SEO analysis',
+    'organic traffic marketplace',
+    'TrafficBoxes'
+  ],
+  openGraph: {
+    title: 'TrafficBoxes - Buy Organic Traffic & AI SEO Audits',
+    description: 'Purchase high-quality organic website traffic and get comprehensive AI-powered SEO audits with advanced artificial intelligence technology.',
+    url: 'https://trafficboxes.com',
+    type: 'website',
+    images: [
+      {
+        url: 'https://trafficboxes.com/logo/TrafficBoxes_Logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'TrafficBoxes - Organic Traffic & AI SEO Audits',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TrafficBoxes - Buy Organic Traffic & AI SEO Audits',
+    description: 'Purchase organic traffic and get AI-powered SEO audits with advanced AI technology.',
+  },
+  alternates: {
+    canonical: 'https://trafficboxes.com',
+  },
 };
 const index = () => {
   return (
