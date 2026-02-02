@@ -94,32 +94,53 @@ const PricingAreaHomeFour = () => {
     }
   }, [isMonthlyActive]);
 
+    const displayPlans = plans.slice(0, 3);
+
     return (
         <>
             <style dangerouslySetInnerHTML={{__html: `
-                .price-scroll {
-                    overflow-x: auto;
-                    overflow-y: hidden;
-                    -webkit-overflow-scrolling: touch;
-                    scrollbar-width: thin;
-                }
-                .price-scroll-width {
-                    min-width: max-content;
-                }
-                .price-scroll .price-custom-col-2 .row {
+                .price-plans-grid {
                     display: flex;
-                    flex-wrap: nowrap;
+                    flex-wrap: wrap;
+                    gap: 0;
                 }
-                .price-scroll .price-custom-col-2 > .row > div {
-                    min-width: 280px;
-                    max-width: 280px;
-                    flex-shrink: 0;
-                    flex-grow: 0;
+                .price-plans-grid .plan-column {
+                    flex: 1 1 280px;
+                    min-width: 200px;
+                    max-width: 100%;
                 }
-                @media (max-width: 768px) {
-                    .price-scroll .price-custom-col-2 > .row > div {
+                @media (min-width: 992px) {
+                    .price-plans-grid .plan-column {
+                        flex: 0 1 calc(33.333% - 1px);
                         min-width: 200px;
-                        max-width: 200px;
+                    }
+                }
+                @media (min-width: 768px) and (max-width: 991px) {
+                    .price-plans-grid .plan-column {
+                        flex: 0 1 calc(50% - 1px);
+                    }
+                }
+                @media (max-width: 767px) {
+                    .price-plans-grid .plan-column {
+                        flex: 1 1 100%;
+                    }
+                    .tppriceing-top .row,
+                    .pricing-box-4 .row {
+                        flex-direction: column;
+                    }
+                    .tppriceing-top .price-custom-col-1 {
+                        display: none;
+                    }
+                    .tppriceing-top .price-custom-col-2,
+                    .pricing-box-4 .price-custom-col-2 {
+                        width: 100%;
+                    }
+                    .pricing-box-4 .price-custom-col-1 {
+                        width: 100%;
+                        margin-bottom: 8px;
+                    }
+                    .pricing-box-4 .row:last-child .price-custom-col-1 {
+                        display: none;
                     }
                 }
             `}} />
@@ -167,113 +188,105 @@ const PricingAreaHomeFour = () => {
                             <p style={{ color: 'red' }}>{error}</p>
                         </div>
                     ) : (
-                    <div className="price-scroll">
-                        <div className="price-scroll-width">
-                            <div className="row gx-0">
-                                <div className="col-12">
-
-                                    <div id="monthly-price" className={`wrapper-full ${isMonthlyActive ? "" : "price-is-hide"}`}>
-                                    {/* <!-- priceing-top --> */}
-                                    <div className="tppriceing-top">
-                                        <div className="row gx-0">
-                                            <div className="price-custom-col-1">
-                                            </div>
-                                            <div className="price-custom-col-2">
-                                                <div className="row gx-0">
-                                                    {plans.map((plan, index) => {
-                                                        const priceParts = planService.formatPrice(plan.price);
-                                                        const isActive = index === Math.floor(plans.length / 2);
-                                                        return (
-                                                            <div key={plan.planName} style={{ minWidth: '280px', maxWidth: '280px', flexShrink: 0 }}>
-                                                                <div className={`tppricing-4-head ${isActive ? "active" : ""} text-center ${isActive ? "p-relative" : ""}`}>
-                                                                    {isActive && (
-                                                                        <>
-                                                                            <div className="big-price-shape"></div>
-                                                                            <div className="sm-price-shape"></div>
-                                                                        </>
-                                                                    )}
-                                                                    <span>{planService.formatPlanName(plan.planName)}</span>
-                                                                    <h4 className="title">${priceParts.dollars}.{priceParts.cents}</h4>
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-                                            </div>
+                    <div className="row gx-0">
+                        <div className="col-12">
+                            <div id="monthly-price" className={`wrapper-full ${isMonthlyActive ? "" : "price-is-hide"}`}>
+                            {/* <!-- priceing-top --> */}
+                            <div className="tppriceing-top">
+                                <div className="row gx-0">
+                                    <div className="price-custom-col-1">
+                                    </div>
+                                    <div className="price-custom-col-2">
+                                        <div className="row gx-0 price-plans-grid">
+                                            {displayPlans.map((plan, index) => {
+                                                const priceParts = planService.formatPrice(plan.price);
+                                                const isActive = index === Math.floor(displayPlans.length / 2);
+                                                return (
+                                                    <div key={plan.planName} className="plan-column">
+                                                        <div className={`tppricing-4-head ${isActive ? "active" : ""} text-center ${isActive ? "p-relative" : ""}`}>
+                                                            {isActive && (
+                                                                <>
+                                                                    <div className="big-price-shape"></div>
+                                                                    <div className="sm-price-shape"></div>
+                                                                </>
+                                                            )}
+                                                            <span>{planService.formatPlanName(plan.planName)}</span>
+                                                            <h4 className="title">${priceParts.dollars}.{priceParts.cents}</h4>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                     </div>
-                                    {/* <!-- priceing-top-end -->
-                                    <!-- pricing-box --> */}
-                                    <div className="pricing-box-4">
-                                        {featureList.map((feature) => 
-                                            <div key={feature.id} className="row gx-0">
-                                                <div className="price-custom-col-1">
-                                                    <div className="tppricing-4-title">
-                                                        <h4 className="title">{feature.title}</h4>
-                                                    </div>
-                                                </div>
-                                                <div className="price-custom-col-2">
-                                                    <div className="row gx-0">
-                                                        {plans.map((plan, planIndex) => {
-                                                            const isActive = planIndex === Math.floor(plans.length / 2);
-                                                            const isFirst = planIndex === 0;
-                                                            const isLast = planIndex === plans.length - 1;
-                                                            const featureValue = getFeatureValue(plan, feature.key);
-                                                            let priceClass = "tppricing-4-price text-center";
-                                                            if (isFirst) priceClass += " tppricing-right";
-                                                            if (isLast) priceClass += " tppricing-left";
-                                                            if (isActive) priceClass += " active";
-                                                            
-                                                            return (
-                                                                 <div key={plan.planName} style={{ minWidth: '280px', maxWidth: '280px', flexShrink: 0 }}>
-                                                                    <div className={priceClass}>
-                                                                        <p>{featureValue}</p>
-                                                                    </div>
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                </div>
-                                            </div>                                        
-                                        )} 
-                                        {/* <!-- pricing-item-end -->
-                                        <!-- pricing-item --> */}
-                                        <div className="row gx-0">
-                                            <div className="price-custom-col-1"></div>
-                                            <div className="price-custom-col-2">
-                                                <div className="row gx-0">
-                                                    {plans.map((plan, btnIndex) => {
-                                                        const isActive = btnIndex === Math.floor(plans.length / 2);
-                                                        const isFirst = btnIndex === 0;
-                                                        const isLast = btnIndex === plans.length - 1;
-                                                        let btnClass = "tppricing-4-price tppricing-4-btn";
-                                                        if (isFirst) btnClass += " tppricing-right";
-                                                        if (isLast) btnClass += " tppricing-left";
-                                                        if (isActive) btnClass += " active";
-                                                        
-                                                        return (
-                                                             <div key={plan.planName} style={{ minWidth: '280px', maxWidth: '280px', flexShrink: 0 }}>
-                                                                <div className={btnClass}>
-                                                                    <p>
-                                                                        <a href="https://app.trafficboxes.com/en/auth/register">
-                                                                            <button>Join this Plan</button>
-                                                                        </a>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* <!-- pricing-item-end --> */}
-                                    </div>
-                                    {/* <!-- pricing-box-end --> */}
-                                    </div>
-
-                                    
-                                    
                                 </div>
+                            </div>
+                            {/* <!-- priceing-top-end -->
+                            <!-- pricing-box --> */}
+                            <div className="pricing-box-4">
+                                {featureList.map((feature) => 
+                                    <div key={feature.id} className="row gx-0">
+                                        <div className="price-custom-col-1">
+                                            <div className="tppricing-4-title">
+                                                <h4 className="title">{feature.title}</h4>
+                                            </div>
+                                        </div>
+                                        <div className="price-custom-col-2">
+                                            <div className="row gx-0 price-plans-grid">
+                                                {displayPlans.map((plan, planIndex) => {
+                                                    const isActive = planIndex === Math.floor(displayPlans.length / 2);
+                                                    const isFirst = planIndex === 0;
+                                                    const isLast = planIndex === displayPlans.length - 1;
+                                                    const featureValue = getFeatureValue(plan, feature.key);
+                                                    let priceClass = "tppricing-4-price text-center";
+                                                    if (isFirst) priceClass += " tppricing-right";
+                                                    if (isLast) priceClass += " tppricing-left";
+                                                    if (isActive) priceClass += " active";
+                                                    
+                                                    return (
+                                                        <div key={plan.planName} className="plan-column">
+                                                            <div className={priceClass}>
+                                                                <p>{featureValue}</p>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>                                        
+                                )} 
+                                {/* <!-- pricing-item-end -->
+                                <!-- pricing-item --> */}
+                                <div className="row gx-0">
+                                    <div className="price-custom-col-1"></div>
+                                    <div className="price-custom-col-2">
+                                        <div className="row gx-0 price-plans-grid">
+                                            {displayPlans.map((plan, btnIndex) => {
+                                                const isActive = btnIndex === Math.floor(displayPlans.length / 2);
+                                                const isFirst = btnIndex === 0;
+                                                const isLast = btnIndex === displayPlans.length - 1;
+                                                let btnClass = "tppricing-4-price tppricing-4-btn";
+                                                if (isFirst) btnClass += " tppricing-right";
+                                                if (isLast) btnClass += " tppricing-left";
+                                                if (isActive) btnClass += " active";
+                                                
+                                                return (
+                                                    <div key={plan.planName} className="plan-column">
+                                                        <div className={btnClass}>
+                                                            <p>
+                                                                <a href="https://app.trafficboxes.com/en/auth/register">
+                                                                    <button>Join this Plan</button>
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* <!-- pricing-item-end --> */}
+                            </div>
+                            {/* <!-- pricing-box-end --> */}
                             </div>
                         </div>
                     </div>
