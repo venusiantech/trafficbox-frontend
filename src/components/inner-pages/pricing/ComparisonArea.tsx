@@ -1,171 +1,175 @@
-import NoticIcon from "@/svg/inner-pages-icons/NoticIcon";
+'use client';
 
-// comparison data type
-interface comparison_data_type {
-    id: number;
-    title: string;
-    inner_items: ({
-        id: number;
-        title: string;
-        essential: number;
-        business: number;
-        pro: number;
-    } | {
-        id: number;
-        title: string;
-        essential: string;
-        business: string;
-        pro: string;
-    })[];
+import NoticIcon from '@/svg/inner-pages-icons/NoticIcon';
+import { Plan, PlanFeatures } from '@/services/planService';
+
+interface ComparisonAreaProps {
+    plans: Plan[];
+    loading: boolean;
 }
-// comparison data 
-const comparison_data: comparison_data_type[] = [
-    {
-        id: 1,
-        title: "Account",
-        inner_items: [
-            {
-                id: 1,
-                title: "Projects",
-                essential: 100,
-                business: 200,
-                pro: 250,
-            },
-            {
-                id: 2,
-                title: "User Seats",
-                essential: 10,
-                business: 20,
-                pro: 30,
-            },
-            {
-                id: 3,
-                title: "Competitors per project",
-                essential: "Limited",
-                business: "Limited",
-                pro: "Limited",
-            },
-            {
-                id: 4,
-                title: "Web design",
-                essential: "15 articles",
-                business: "30 articles",
-                pro: "20 articles",
-            },
 
-        ]
-    },
-    {
-        id: 2,
-        title: "Website audit",
-        inner_items: [
-            {
-                id: 1,
-                title: "Pages per account",
-                essential: 100,
-                business: 200,
-                pro: 250,
-            },
-            {
-                id: 2,
-                title: "Pages per project",
-                essential: 10,
-                business: 20,
-                pro: 30,
-            },
-            {
-                id: 3,
-                title: "Page Changes Monitor (pages)",
-                essential: "Limited",
-                business: "Limited",
-                pro: "Limited",
-            },
-        ]
-    },
-    {
-        id: 3,
-        title: "Rank tracker",
-        inner_items: [
-            {
-                id: 1,
-                title: "Keywords",
-                essential: 100,
-                business: 200,
-                pro: 250,
-            },
-            {
-                id: 2,
-                title: "Locations per 1 keyword",
-                essential: 10,
-                business: 20,
-                pro: 30,
-            },
-            {
-                id: 3,
-                title: "Keyword checks in total",
-                essential: "Limited",
-                business: "Limited",
-                pro: "Limited",
-            },
-        ]
-    },
-]
-const ComparisonArea = () => {
-    return (
-        <>
+const FEATURE_LABELS: Record<keyof PlanFeatures, string> = {
+    countryTargeting: 'Country targeting',
+    trafficSources: 'Traffic sources',
+    behaviorSettings: 'Behavior settings',
+    campaignRenewal: 'Campaign renewal',
+    support: 'Support',
+    analytics: 'Analytics',
+};
+
+const formatFeatureValue = (value: string): string => {
+    if (!value) return '—';
+    return value
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ')
+        .replace(/\b24 7\b/i, '24/7');
+};
+
+const formatLimit = (n: number, planName: string): string => {
+    if (planName === 'custom' && n === 0) return 'Custom';
+    if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+    if (n >= 1_000) return `${(n / 1_000).toFixed(0)}K`;
+    return String(n);
+};
+
+const ComparisonArea = ({ plans, loading }: ComparisonAreaProps) => {
+    const featureKeys = Object.keys(FEATURE_LABELS) as (keyof PlanFeatures)[];
+
+    if (loading || !plans.length) {
+        return (
             <section className="comparison-area">
                 <div className="container">
-                    {comparison_data.map((item, i) =>
-                        <div key={i} className="row">
+                    <div className="pricing-comparison-tag">
+                        <h5 className="pricing-comparison-tag-title">
+                            <span /> Feature comparison
+                        </h5>
+                    </div>
+                    <div className="pricing-comparison mb-35">
+                        <p className="text-center py-5 text-muted">
+                            {loading ? 'Loading comparison...' : 'No plans to compare.'}
+                        </p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    const comparisonSections = [
+        {
+            id: 'limits',
+            title: 'Limits',
+            rows: [
+                { id: 'visits', label: 'Visits included', getValue: (p: Plan) => formatLimit(p.visitsIncluded, p.planName) },
+                { id: 'campaigns', label: 'Campaign limit', getValue: (p: Plan) => p.planName === 'custom' && p.campaignLimit === 0 ? 'Custom' : String(p.campaignLimit) },
+            ],
+        },
+        {
+            id: 'features',
+            title: 'Features',
+            rows: featureKeys.map((key) => ({
+                id: key,
+                label: FEATURE_LABELS[key],
+                getValue: (p: Plan) => formatFeatureValue(p.features[key]),
+            })),
+        },
+    ];
+
+    return (
+        <>
+            <style dangerouslySetInnerHTML={{ __html: `
+                .comparison-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+                .comparison-table {
+                    width: 100%;
+                    min-width: 700px;
+                    border-collapse: collapse;
+                    font-family: var(--tp-ff-jakarta);
+                }
+                .comparison-table th,
+                .comparison-table td {
+                    padding: 14px 16px;
+                    text-align: left;
+                    border-bottom: 1px solid #E7E7EA;
+                    vertical-align: middle;
+                }
+                .comparison-table thead th {
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: var(--tp-common-11);
+                    text-transform: capitalize;
+                    background: #f9fafb;
+                }
+                .comparison-table thead th:first-child { width: 28%; min-width: 160px; }
+                .comparison-table tbody td:first-child {
+                    font-weight: 500;
+                    color: var(--tp-common-11);
+                }
+                .comparison-table tbody td:not(:first-child) {
+                    font-size: 14px;
+                    color: var(--tp-grey-8);
+                }
+                .comparison-table .comparison-plan-name {
+                    font-weight: 600;
+                    font-size: 15px;
+                    color: var(--tp-common-11);
+                }
+            ` }} />
+            <section className="comparison-area">
+                <div className="container">
+                    {comparisonSections.map((section, sectionIndex) => (
+                        <div key={section.id} className="row">
                             <div className="col-lg-12">
                                 <div className="pricing-comparison-tag">
-                                    <h5 className={`pricing-comparison-tag-title ${i === 1 ? "pricing-comparison-tag-title-2" : ""} ${i === 2 ? "pricing-comparison-tag-title-3" : ""}`}><span></span>{item.title}</h5>
+                                    <h5
+                                        className={`pricing-comparison-tag-title ${
+                                            sectionIndex === 1 ? 'pricing-comparison-tag-title-2' : ''
+                                        } ${sectionIndex === 2 ? 'pricing-comparison-tag-title-3' : ''}`}
+                                    >
+                                        <span />
+                                        {section.title}
+                                    </h5>
                                 </div>
                                 <div className="pricing-comparison mb-35">
-                                    <div className="pricing-comparison-scroll">
-                                        {item.inner_items?.map((inner_item, index) =>
-                                            <div key={index} className="pricing-comparison-item">
-                                                <div className="row">
-                                                    <div className="col-lg-4 col-sm-4 col-5">
-                                                        <div className="pricing-comparison-item-text d-flex align-items-center">
-                                                            <h4 className="pricing-comparison-item-title">{inner_item.title}</h4>
-                                                            <div className="pricing-feature-info">
-                                                                <span> <NoticIcon /> </span>
-                                                                <div className="pricing-feature-info-tooltip">
-                                                                    <p>Add gradient heading, button, pricing table testimonial etc.</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-8 col-sm-8 col-7">
-                                                        <div className="pricing-comparison-price text-center">
-                                                            <div className="row">
-                                                                <div className="col-lg-4 col-4">
-                                                                    <div className="pricing-comparison-price-item pricing-comparison-price-item-1">
-                                                                        <span>{inner_item.essential}</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-lg-4 col-4">
-                                                                    <div className="pricing-comparison-price-item pricing-comparison-price-item-2">
-                                                                        <span>{inner_item.business}</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-lg-4 col-4">
-                                                                    <div className="pricing-comparison-price-item pricing-comparison-price-item-3">
-                                                                        <span>{inner_item.pro}</span>
+                                    <div className="comparison-table-wrapper">
+                                        <table className="comparison-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Feature</th>
+                                                    {plans.map((plan) => (
+                                                        <th key={plan.planName} className="comparison-plan-name text-center">
+                                                            {plan.planName.charAt(0).toUpperCase() + plan.planName.slice(1)}
+                                                        </th>
+                                                    ))}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {section.rows.map((row) => (
+                                                    <tr key={row.id}>
+                                                        <td>
+                                                            <div className="d-flex align-items-center">
+                                                                <span>{row.label}</span>
+                                                                <div className="pricing-feature-info ms-2">
+                                                                    <span><NoticIcon /></span>
+                                                                    <div className="pricing-feature-info-tooltip">
+                                                                        <p>{row.label}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
+                                                        </td>
+                                                        {plans.map((plan) => (
+                                                            <td key={plan.planName} className="text-center">
+                                                                {row.getValue(plan)}
+                                                            </td>
+                                                        ))}
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    )}
+                    ))}
                 </div>
             </section>
         </>
